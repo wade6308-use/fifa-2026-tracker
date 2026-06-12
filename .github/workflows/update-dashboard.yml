@@ -1,0 +1,42 @@
+name: 更新 FIFA World Cup 26 儀表板
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "2/5 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出儀表板原始碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: 抓取最新比分並重新產生頁面
+        run: python scripts/update_worldcup_2026.py
+
+      - name: 檢查是否有比分更新
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 提交更新
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/worldcup_2026.json index.html
+          git commit -m "Update World Cup 26 scores"
+          git push

@@ -113,6 +113,9 @@ def update_from_sources(data, dry_run=False):
     for group in data["groups"]:
         recalc_group(group)
 
+    if not changed:
+        return changed
+
     data["updated_at"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     if not dry_run:
         DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
