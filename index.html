@@ -94,6 +94,11 @@
     }
     .metric small { display: block; color: var(--muted); }
     .metric strong { display: block; margin-top: 8px; font-size: clamp(24px, 4vw, 42px); }
+    .metric.wide { grid-column: 1 / -1; }
+    .metric.wide strong {
+      font-size: clamp(18px, 2.4vw, 30px);
+      line-height: 1.2;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(340px, 1fr));
@@ -135,6 +140,21 @@
       background: rgba(0,0,0,.18);
     }
     .team-name { text-align: left; font-weight: 750; }
+    .team-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .flag {
+      flex: 0 0 auto;
+      width: 1.45em;
+      display: inline-block;
+      text-align: center;
+      font-size: 1.08em;
+      line-height: 1;
+    }
     .rank {
       display: inline-grid;
       place-items: center;
@@ -169,6 +189,7 @@
     .match-list li.final { border-color: rgba(246,223,154,.42); }
     .date { color: var(--muted); font-variant-numeric: tabular-nums; }
     .fixture { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fixture .team-label { max-width: 100%; }
     .right { text-align: right; }
     .match-list strong { color: var(--gold-soft); text-align: center; font-variant-numeric: tabular-nums; }
     footer {
@@ -212,6 +233,7 @@
       <div class="metric"><small>小組</small><strong>12</strong></div>
       <div class="metric"><small>已完賽</small><strong>2/72</strong></div>
       <div class="metric"><small>A 組目前領先</small><strong>墨西哥 / 韓國</strong></div>
+      <div class="metric wide"><small>下一場比賽</small><strong>B 組｜06-12｜🇨🇦 加拿大 對 🇧🇦 波士尼亞與赫塞哥維納</strong></div>
     </section>
     <section class="grid">
       
@@ -230,7 +252,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">墨西哥</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇲🇽</span><span>墨西哥</span></span></td>
               <td>1</td>
               <td>0</td>
               <td>0</td>
@@ -242,7 +264,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">韓國</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇰🇷</span><span>韓國</span></span></td>
               <td>1</td>
               <td>0</td>
               <td>0</td>
@@ -254,7 +276,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">捷克</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇿</span><span>捷克</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>1</td>
@@ -266,7 +288,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">南非</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇿🇦</span><span>南非</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>1</td>
@@ -282,44 +304,44 @@
         
             <li class="final">
               <span class="date">06-11</span>
-              <span class="fixture">墨西哥</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇲🇽</span><span>墨西哥</span></span></span>
               <strong>2 - 0</strong>
-              <span class="fixture right">南非</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇿🇦</span><span>南非</span></span></span>
             </li>
             
             <li class="final">
               <span class="date">06-11</span>
-              <span class="fixture">韓國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇰🇷</span><span>韓國</span></span></span>
               <strong>2 - 1</strong>
-              <span class="fixture right">捷克</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇿</span><span>捷克</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-18</span>
-              <span class="fixture">捷克</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇿</span><span>捷克</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">南非</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇿🇦</span><span>南非</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-18</span>
-              <span class="fixture">墨西哥</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇲🇽</span><span>墨西哥</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">韓國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇰🇷</span><span>韓國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">南非</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇿🇦</span><span>南非</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">韓國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇰🇷</span><span>韓國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">捷克</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇿</span><span>捷克</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">墨西哥</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇲🇽</span><span>墨西哥</span></span></span>
             </li>
             
       </ol>
@@ -341,7 +363,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">加拿大</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇦</span><span>加拿大</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -353,7 +375,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">波士尼亞與赫塞哥維納</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇧🇦</span><span>波士尼亞與赫塞哥維納</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -365,7 +387,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">卡達</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇶🇦</span><span>卡達</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -377,7 +399,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">瑞士</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇭</span><span>瑞士</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -393,44 +415,44 @@
         
             <li class="next">
               <span class="date">06-12</span>
-              <span class="fixture">加拿大</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇦</span><span>加拿大</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">波士尼亞與赫塞哥維納</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇧🇦</span><span>波士尼亞與赫塞哥維納</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-13</span>
-              <span class="fixture">卡達</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇶🇦</span><span>卡達</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">瑞士</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇭</span><span>瑞士</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-18</span>
-              <span class="fixture">瑞士</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇭</span><span>瑞士</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">波士尼亞與赫塞哥維納</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇧🇦</span><span>波士尼亞與赫塞哥維納</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-18</span>
-              <span class="fixture">加拿大</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇦</span><span>加拿大</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">卡達</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇶🇦</span><span>卡達</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">瑞士</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇭</span><span>瑞士</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">加拿大</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇦</span><span>加拿大</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">波士尼亞與赫塞哥維納</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇧🇦</span><span>波士尼亞與赫塞哥維納</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">卡達</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇶🇦</span><span>卡達</span></span></span>
             </li>
             
       </ol>
@@ -452,7 +474,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">巴西</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇧🇷</span><span>巴西</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -464,7 +486,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">摩洛哥</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇲🇦</span><span>摩洛哥</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -476,7 +498,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">海地</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇭🇹</span><span>海地</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -488,7 +510,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">蘇格蘭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🏴</span><span>蘇格蘭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -504,44 +526,44 @@
         
             <li class="next">
               <span class="date">06-13</span>
-              <span class="fixture">巴西</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇧🇷</span><span>巴西</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">摩洛哥</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇲🇦</span><span>摩洛哥</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-13</span>
-              <span class="fixture">海地</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇭🇹</span><span>海地</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">蘇格蘭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🏴</span><span>蘇格蘭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-19</span>
-              <span class="fixture">蘇格蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🏴</span><span>蘇格蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">摩洛哥</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇲🇦</span><span>摩洛哥</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-19</span>
-              <span class="fixture">巴西</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇧🇷</span><span>巴西</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">海地</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇭🇹</span><span>海地</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">摩洛哥</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇲🇦</span><span>摩洛哥</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">海地</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇭🇹</span><span>海地</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-24</span>
-              <span class="fixture">蘇格蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🏴</span><span>蘇格蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">巴西</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇧🇷</span><span>巴西</span></span></span>
             </li>
             
       </ol>
@@ -563,7 +585,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">美國</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇺🇸</span><span>美國</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -575,7 +597,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">巴拉圭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇵🇾</span><span>巴拉圭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -587,7 +609,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">澳洲</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇦🇺</span><span>澳洲</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -599,7 +621,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">土耳其</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇹🇷</span><span>土耳其</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -615,44 +637,44 @@
         
             <li class="next">
               <span class="date">06-12</span>
-              <span class="fixture">美國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇺🇸</span><span>美國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">巴拉圭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇵🇾</span><span>巴拉圭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-14</span>
-              <span class="fixture">澳洲</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇦🇺</span><span>澳洲</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">土耳其</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇹🇷</span><span>土耳其</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-19</span>
-              <span class="fixture">美國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇺🇸</span><span>美國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">澳洲</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇦🇺</span><span>澳洲</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-19</span>
-              <span class="fixture">土耳其</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇹🇷</span><span>土耳其</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">巴拉圭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇵🇾</span><span>巴拉圭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">土耳其</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇹🇷</span><span>土耳其</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">美國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇺🇸</span><span>美國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">巴拉圭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇵🇾</span><span>巴拉圭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">澳洲</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇦🇺</span><span>澳洲</span></span></span>
             </li>
             
       </ol>
@@ -674,7 +696,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">德國</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇩🇪</span><span>德國</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -686,7 +708,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">庫拉索</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇼</span><span>庫拉索</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -698,7 +720,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">象牙海岸</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇮</span><span>象牙海岸</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -710,7 +732,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">厄瓜多</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇪🇨</span><span>厄瓜多</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -726,44 +748,44 @@
         
             <li class="next">
               <span class="date">06-14</span>
-              <span class="fixture">德國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇩🇪</span><span>德國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">庫拉索</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇼</span><span>庫拉索</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-14</span>
-              <span class="fixture">象牙海岸</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇮</span><span>象牙海岸</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">厄瓜多</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇪🇨</span><span>厄瓜多</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-20</span>
-              <span class="fixture">德國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇩🇪</span><span>德國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">象牙海岸</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇮</span><span>象牙海岸</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-20</span>
-              <span class="fixture">厄瓜多</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇪🇨</span><span>厄瓜多</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">庫拉索</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇼</span><span>庫拉索</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">庫拉索</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇼</span><span>庫拉索</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">象牙海岸</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇮</span><span>象牙海岸</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">厄瓜多</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇪🇨</span><span>厄瓜多</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">德國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇩🇪</span><span>德國</span></span></span>
             </li>
             
       </ol>
@@ -785,7 +807,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">荷蘭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇳🇱</span><span>荷蘭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -797,7 +819,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">日本</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇯🇵</span><span>日本</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -809,7 +831,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">瑞典</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇸🇪</span><span>瑞典</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -821,7 +843,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">突尼西亞</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇹🇳</span><span>突尼西亞</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -837,44 +859,44 @@
         
             <li class="next">
               <span class="date">06-14</span>
-              <span class="fixture">荷蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇱</span><span>荷蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">日本</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇯🇵</span><span>日本</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-14</span>
-              <span class="fixture">瑞典</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇸🇪</span><span>瑞典</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">突尼西亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇹🇳</span><span>突尼西亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-20</span>
-              <span class="fixture">荷蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇱</span><span>荷蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">瑞典</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇪</span><span>瑞典</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-21</span>
-              <span class="fixture">突尼西亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇹🇳</span><span>突尼西亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">日本</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇯🇵</span><span>日本</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">突尼西亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇹🇳</span><span>突尼西亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">荷蘭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇳🇱</span><span>荷蘭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-25</span>
-              <span class="fixture">日本</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇯🇵</span><span>日本</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">瑞典</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇪</span><span>瑞典</span></span></span>
             </li>
             
       </ol>
@@ -896,7 +918,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">比利時</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇧🇪</span><span>比利時</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -908,7 +930,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">埃及</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇪🇬</span><span>埃及</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -920,7 +942,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">伊朗</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇮🇷</span><span>伊朗</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -932,7 +954,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">紐西蘭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇳🇿</span><span>紐西蘭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -948,44 +970,44 @@
         
             <li class="next">
               <span class="date">06-15</span>
-              <span class="fixture">比利時</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇧🇪</span><span>比利時</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">埃及</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇪🇬</span><span>埃及</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-15</span>
-              <span class="fixture">伊朗</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇮🇷</span><span>伊朗</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">紐西蘭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇳🇿</span><span>紐西蘭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-21</span>
-              <span class="fixture">比利時</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇧🇪</span><span>比利時</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">伊朗</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇮🇷</span><span>伊朗</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-21</span>
-              <span class="fixture">紐西蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇿</span><span>紐西蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">埃及</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇪🇬</span><span>埃及</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">紐西蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇿</span><span>紐西蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">比利時</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇧🇪</span><span>比利時</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">埃及</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇪🇬</span><span>埃及</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">伊朗</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇮🇷</span><span>伊朗</span></span></span>
             </li>
             
       </ol>
@@ -1007,7 +1029,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">西班牙</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇪🇸</span><span>西班牙</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1019,7 +1041,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">維德角</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇻</span><span>維德角</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1031,7 +1053,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">沙烏地阿拉伯</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇸🇦</span><span>沙烏地阿拉伯</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1043,7 +1065,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">烏拉圭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇺🇾</span><span>烏拉圭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1059,44 +1081,44 @@
         
             <li class="next">
               <span class="date">06-15</span>
-              <span class="fixture">西班牙</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇪🇸</span><span>西班牙</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">維德角</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇻</span><span>維德角</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-15</span>
-              <span class="fixture">沙烏地阿拉伯</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇸🇦</span><span>沙烏地阿拉伯</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">烏拉圭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇺🇾</span><span>烏拉圭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-21</span>
-              <span class="fixture">西班牙</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇪🇸</span><span>西班牙</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">沙烏地阿拉伯</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇦</span><span>沙烏地阿拉伯</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-21</span>
-              <span class="fixture">烏拉圭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇺🇾</span><span>烏拉圭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">維德角</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇻</span><span>維德角</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">維德角</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇻</span><span>維德角</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">沙烏地阿拉伯</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇦</span><span>沙烏地阿拉伯</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">烏拉圭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇺🇾</span><span>烏拉圭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">西班牙</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇪🇸</span><span>西班牙</span></span></span>
             </li>
             
       </ol>
@@ -1118,7 +1140,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">法國</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇫🇷</span><span>法國</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1130,7 +1152,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">塞內加爾</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇸🇳</span><span>塞內加爾</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1142,7 +1164,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">伊拉克</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇮🇶</span><span>伊拉克</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1154,7 +1176,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">挪威</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇳🇴</span><span>挪威</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1170,44 +1192,44 @@
         
             <li class="next">
               <span class="date">06-16</span>
-              <span class="fixture">法國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇫🇷</span><span>法國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">塞內加爾</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇳</span><span>塞內加爾</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-16</span>
-              <span class="fixture">伊拉克</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇮🇶</span><span>伊拉克</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">挪威</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇳🇴</span><span>挪威</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-22</span>
-              <span class="fixture">法國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇫🇷</span><span>法國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">伊拉克</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇮🇶</span><span>伊拉克</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-22</span>
-              <span class="fixture">挪威</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇴</span><span>挪威</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">塞內加爾</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇸🇳</span><span>塞內加爾</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">挪威</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇳🇴</span><span>挪威</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">法國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇫🇷</span><span>法國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-26</span>
-              <span class="fixture">塞內加爾</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇸🇳</span><span>塞內加爾</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">伊拉克</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇮🇶</span><span>伊拉克</span></span></span>
             </li>
             
       </ol>
@@ -1229,7 +1251,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">阿根廷</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇦🇷</span><span>阿根廷</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1241,7 +1263,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">阿爾及利亞</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇩🇿</span><span>阿爾及利亞</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1253,7 +1275,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">奧地利</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇦🇹</span><span>奧地利</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1265,7 +1287,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">約旦</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇯🇴</span><span>約旦</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1281,44 +1303,44 @@
         
             <li class="next">
               <span class="date">06-16</span>
-              <span class="fixture">阿根廷</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇦🇷</span><span>阿根廷</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">阿爾及利亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇩🇿</span><span>阿爾及利亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-17</span>
-              <span class="fixture">奧地利</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇦🇹</span><span>奧地利</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">約旦</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇯🇴</span><span>約旦</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-22</span>
-              <span class="fixture">阿根廷</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇦🇷</span><span>阿根廷</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">奧地利</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇦🇹</span><span>奧地利</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-22</span>
-              <span class="fixture">約旦</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇯🇴</span><span>約旦</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">阿爾及利亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇩🇿</span><span>阿爾及利亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">阿爾及利亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇩🇿</span><span>阿爾及利亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">奧地利</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇦🇹</span><span>奧地利</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">約旦</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇯🇴</span><span>約旦</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">阿根廷</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇦🇷</span><span>阿根廷</span></span></span>
             </li>
             
       </ol>
@@ -1340,7 +1362,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">葡萄牙</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇵🇹</span><span>葡萄牙</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1352,7 +1374,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">剛果民主共和國</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇩</span><span>剛果民主共和國</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1364,7 +1386,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">烏茲別克</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇺🇿</span><span>烏茲別克</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1376,7 +1398,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">哥倫比亞</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇨🇴</span><span>哥倫比亞</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1392,44 +1414,44 @@
         
             <li class="next">
               <span class="date">06-17</span>
-              <span class="fixture">葡萄牙</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇵🇹</span><span>葡萄牙</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">剛果民主共和國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇩</span><span>剛果民主共和國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-17</span>
-              <span class="fixture">烏茲別克</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇺🇿</span><span>烏茲別克</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">哥倫比亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇴</span><span>哥倫比亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-23</span>
-              <span class="fixture">葡萄牙</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇵🇹</span><span>葡萄牙</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">烏茲別克</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇺🇿</span><span>烏茲別克</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-23</span>
-              <span class="fixture">哥倫比亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇴</span><span>哥倫比亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">剛果民主共和國</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇨🇩</span><span>剛果民主共和國</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">哥倫比亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇴</span><span>哥倫比亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">葡萄牙</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇵🇹</span><span>葡萄牙</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">剛果民主共和國</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇨🇩</span><span>剛果民主共和國</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">烏茲別克</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇺🇿</span><span>烏茲別克</span></span></span>
             </li>
             
       </ol>
@@ -1451,7 +1473,7 @@
           
             <tr class="advance">
               <td><span class="rank">1</span></td>
-              <td class="team-name">英格蘭</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🏴</span><span>英格蘭</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1463,7 +1485,7 @@
             
             <tr class="advance">
               <td><span class="rank">2</span></td>
-              <td class="team-name">克羅埃西亞</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇭🇷</span><span>克羅埃西亞</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1475,7 +1497,7 @@
             
             <tr class="third">
               <td><span class="rank">3</span></td>
-              <td class="team-name">迦納</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇬🇭</span><span>迦納</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1487,7 +1509,7 @@
             
             <tr class="">
               <td><span class="rank">4</span></td>
-              <td class="team-name">巴拿馬</td>
+              <td class="team-name"><span class="team-label"><span class="flag">🇵🇦</span><span>巴拿馬</span></span></td>
               <td>0</td>
               <td>0</td>
               <td>0</td>
@@ -1503,44 +1525,44 @@
         
             <li class="next">
               <span class="date">06-17</span>
-              <span class="fixture">英格蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🏴</span><span>英格蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">克羅埃西亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇭🇷</span><span>克羅埃西亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-17</span>
-              <span class="fixture">迦納</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇬🇭</span><span>迦納</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">巴拿馬</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇵🇦</span><span>巴拿馬</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-23</span>
-              <span class="fixture">英格蘭</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🏴</span><span>英格蘭</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">迦納</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇬🇭</span><span>迦納</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-23</span>
-              <span class="fixture">巴拿馬</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇵🇦</span><span>巴拿馬</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">克羅埃西亞</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇭🇷</span><span>克羅埃西亞</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">巴拿馬</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇵🇦</span><span>巴拿馬</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">英格蘭</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🏴</span><span>英格蘭</span></span></span>
             </li>
             
             <li class="next">
               <span class="date">06-27</span>
-              <span class="fixture">克羅埃西亞</span>
+              <span class="fixture"><span class="team-label"><span class="flag">🇭🇷</span><span>克羅埃西亞</span></span></span>
               <strong>對</strong>
-              <span class="fixture right">迦納</span>
+              <span class="fixture right"><span class="team-label"><span class="flag">🇬🇭</span><span>迦納</span></span></span>
             </li>
             
       </ol>

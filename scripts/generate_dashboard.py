@@ -57,6 +57,57 @@ TEAM_ZH = {
     "Panama": "巴拿馬",
 }
 
+TEAM_FLAG = {
+    "Mexico": "🇲🇽",
+    "South Korea": "🇰🇷",
+    "Czechia": "🇨🇿",
+    "South Africa": "🇿🇦",
+    "Canada": "🇨🇦",
+    "Bosnia and Herzegovina": "🇧🇦",
+    "Qatar": "🇶🇦",
+    "Switzerland": "🇨🇭",
+    "Brazil": "🇧🇷",
+    "Morocco": "🇲🇦",
+    "Haiti": "🇭🇹",
+    "Scotland": "🏴",
+    "United States": "🇺🇸",
+    "Paraguay": "🇵🇾",
+    "Australia": "🇦🇺",
+    "Türkiye": "🇹🇷",
+    "Germany": "🇩🇪",
+    "Curacao": "🇨🇼",
+    "Ivory Coast": "🇨🇮",
+    "Ecuador": "🇪🇨",
+    "Netherlands": "🇳🇱",
+    "Japan": "🇯🇵",
+    "Sweden": "🇸🇪",
+    "Tunisia": "🇹🇳",
+    "Belgium": "🇧🇪",
+    "Egypt": "🇪🇬",
+    "Iran": "🇮🇷",
+    "New Zealand": "🇳🇿",
+    "Spain": "🇪🇸",
+    "Cabo Verde": "🇨🇻",
+    "Saudi Arabia": "🇸🇦",
+    "Uruguay": "🇺🇾",
+    "France": "🇫🇷",
+    "Senegal": "🇸🇳",
+    "Iraq": "🇮🇶",
+    "Norway": "🇳🇴",
+    "Argentina": "🇦🇷",
+    "Algeria": "🇩🇿",
+    "Austria": "🇦🇹",
+    "Jordan": "🇯🇴",
+    "Portugal": "🇵🇹",
+    "DR Congo": "🇨🇩",
+    "Uzbekistan": "🇺🇿",
+    "Colombia": "🇨🇴",
+    "England": "🏴",
+    "Croatia": "🇭🇷",
+    "Ghana": "🇬🇭",
+    "Panama": "🇵🇦",
+}
+
 
 def signed(value):
     return f"+{value}" if value > 0 else str(value)
@@ -64,6 +115,10 @@ def signed(value):
 
 def team_name(name):
     return TEAM_ZH.get(name, name)
+
+
+def team_label(name):
+    return f'<span class="flag">{TEAM_FLAG.get(name, "🏳️")}</span><span>{team_name(name)}</span>'
 
 
 def fmt_score(match):
@@ -80,7 +135,7 @@ def render_group(group):
             f"""
             <tr class="{advance}">
               <td><span class="rank">{index}</span></td>
-              <td class="team-name">{team_name(team["team"])}</td>
+              <td class="team-name"><span class="team-label">{team_label(team["team"])}</span></td>
               <td>{team["w"]}</td>
               <td>{team["d"]}</td>
               <td>{team["l"]}</td>
@@ -99,9 +154,9 @@ def render_group(group):
             f"""
             <li class="{status}">
               <span class="date">{match["date"][5:]}</span>
-              <span class="fixture">{team_name(match["home"])}</span>
+              <span class="fixture"><span class="team-label">{team_label(match["home"])}</span></span>
               <strong>{fmt_score(match)}</strong>
-              <span class="fixture right">{team_name(match["away"])}</span>
+              <span class="fixture right"><span class="team-label">{team_label(match["away"])}</span></span>
             </li>
             """
         )
@@ -129,6 +184,18 @@ def render_group(group):
     """
 
 
+def next_match(data):
+    upcoming = []
+    for group in data["groups"]:
+        for order, match in enumerate(group["matches"]):
+            if match.get("status") != "finished":
+                upcoming.append((match["date"], group["name"], order, match))
+    if not upcoming:
+        return None
+    _, group_name, _, match = sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[0]
+    return group_name, match
+
+
 def main():
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     total_matches = sum(len(group["matches"]) for group in data["groups"])
@@ -141,6 +208,16 @@ def main():
     groups_html = "\n".join(render_group(group) for group in data["groups"])
     payload = json.dumps(data, ensure_ascii=False)
     leaders = " / ".join(team_name(team["team"]) for team in data["groups"][0]["teams"][:2])
+    upcoming = next_match(data)
+    if upcoming:
+        next_group, next_game = upcoming
+        next_text = (
+            f'{next_group} 組｜{next_game["date"][5:]}｜'
+            f'{TEAM_FLAG.get(next_game["home"], "")} {team_name(next_game["home"])} 對 '
+            f'{TEAM_FLAG.get(next_game["away"], "")} {team_name(next_game["away"])}'
+        )
+    else:
+        next_text = "小組賽已全部完賽"
 
     HTML_PATH.write_text(
         f"""<!doctype html>
@@ -239,6 +316,11 @@ def main():
     }}
     .metric small {{ display: block; color: var(--muted); }}
     .metric strong {{ display: block; margin-top: 8px; font-size: clamp(24px, 4vw, 42px); }}
+    .metric.wide {{ grid-column: 1 / -1; }}
+    .metric.wide strong {{
+      font-size: clamp(18px, 2.4vw, 30px);
+      line-height: 1.2;
+    }}
     .grid {{
       display: grid;
       grid-template-columns: repeat(3, minmax(340px, 1fr));
@@ -280,6 +362,21 @@ def main():
       background: rgba(0,0,0,.18);
     }}
     .team-name {{ text-align: left; font-weight: 750; }}
+    .team-label {{
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      max-width: 100%;
+    }}
+    .flag {{
+      flex: 0 0 auto;
+      width: 1.45em;
+      display: inline-block;
+      text-align: center;
+      font-size: 1.08em;
+      line-height: 1;
+    }}
     .rank {{
       display: inline-grid;
       place-items: center;
@@ -314,6 +411,7 @@ def main():
     .match-list li.final {{ border-color: rgba(246,223,154,.42); }}
     .date {{ color: var(--muted); font-variant-numeric: tabular-nums; }}
     .fixture {{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+    .fixture .team-label {{ max-width: 100%; }}
     .right {{ text-align: right; }}
     .match-list strong {{ color: var(--gold-soft); text-align: center; font-variant-numeric: tabular-nums; }}
     footer {{
@@ -357,6 +455,7 @@ def main():
       <div class="metric"><small>小組</small><strong>{len(data["groups"])}</strong></div>
       <div class="metric"><small>已完賽</small><strong>{finished}/{total_matches}</strong></div>
       <div class="metric"><small>A 組目前領先</small><strong>{leaders}</strong></div>
+      <div class="metric wide"><small>下一場比賽</small><strong>{next_text}</strong></div>
     </section>
     <section class="grid">
       {groups_html}
