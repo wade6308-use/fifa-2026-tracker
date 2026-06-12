@@ -33,11 +33,17 @@ def compact_text(html):
     text = re.sub(r"&nbsp;", " ", text)
     text = re.sub(r"&#8217;|&rsquo;", "'", text)
     text = re.sub(r"&amp;", "&", text)
-    return re.sub(r"\s+", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.replace("Türkiye", "Turkiye")
+
+
+def normalized_name(name):
+    return name.replace("Türkiye", "Turkiye")
 
 
 def find_score(text, home, away):
-    # SB Nation currently formats results as "Mexico 2, South Africa 0".
+    home = normalized_name(home)
+    away = normalized_name(away)
     patterns = [
         rf"{re.escape(home)}\s+(\d+)\s*,\s*{re.escape(away)}\s+(\d+)",
         rf"{re.escape(away)}\s+(\d+)\s*,\s*{re.escape(home)}\s+(\d+)",
@@ -61,16 +67,16 @@ def reset_table(group):
 def apply_match(group, match):
     home = next(team for team in group["teams"] if team["team"] == match["home"])
     away = next(team for team in group["teams"] if team["team"] == match["away"])
-    hs, away_score = match["home_score"], match["away_score"]
-    home["gf"] += hs
+    home_score, away_score = match["home_score"], match["away_score"]
+    home["gf"] += home_score
     home["ga"] += away_score
     away["gf"] += away_score
-    away["ga"] += hs
-    if hs > away_score:
+    away["ga"] += home_score
+    if home_score > away_score:
         home["w"] += 1
         away["l"] += 1
         home["pts"] += 3
-    elif hs < away_score:
+    elif home_score < away_score:
         away["w"] += 1
         home["l"] += 1
         away["pts"] += 3
@@ -108,7 +114,7 @@ def update_from_sources(data, dry_run=False):
             match["status"] = "finished"
             new = (match["home_score"], match["away_score"], match["status"])
             if old != new:
-                changed.append(f'{group["name"]} 組：{match["home"]} {score[0]}-{score[1]} {match["away"]}')
+                changed.append(f'Group {group["name"]}: {match["home"]} {score[0]}-{score[1]} {match["away"]}')
 
     for group in data["groups"]:
         recalc_group(group)
@@ -124,18 +130,18 @@ def update_from_sources(data, dry_run=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="從公開比分頁更新 FIFA World Cup 26 儀表板。")
-    parser.add_argument("--dry-run", action="store_true", help="只抓取並回報變更，不寫入檔案。")
+    parser = argparse.ArgumentParser(description="Update the FIFA World Cup 26 dashboard from public score pages.")
+    parser.add_argument("--dry-run", action="store_true", help="Fetch and report changes without writing files.")
     args = parser.parse_args()
 
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     changed = update_from_sources(data, dry_run=args.dry_run)
     if changed:
-        print("已更新賽事：")
+        print("Updated matches:")
         for item in changed:
             print(f"- {item}")
     else:
-        print("目前沒有新的完賽比分。")
+        print("No new finished matches found.")
 
 
 if __name__ == "__main__":

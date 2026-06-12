@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -22,7 +23,9 @@ TEAM_ZH = {
     "United States": "美國",
     "Paraguay": "巴拉圭",
     "Australia": "澳洲",
+    "Turkiye": "土耳其",
     "Türkiye": "土耳其",
+    "T羹rkiye": "土耳其",
     "Germany": "德國",
     "Curacao": "庫拉索",
     "Ivory Coast": "象牙海岸",
@@ -73,7 +76,9 @@ TEAM_FLAG = {
     "United States": "🇺🇸",
     "Paraguay": "🇵🇾",
     "Australia": "🇦🇺",
+    "Turkiye": "🇹🇷",
     "Türkiye": "🇹🇷",
+    "T羹rkiye": "🇹🇷",
     "Germany": "🇩🇪",
     "Curacao": "🇨🇼",
     "Ivory Coast": "🇨🇮",
@@ -108,6 +113,112 @@ TEAM_FLAG = {
     "Panama": "🇵🇦",
 }
 
+KICKOFF_ET = {
+    ("2026-06-11", "Mexico", "South Africa"): "15:00",
+    ("2026-06-11", "South Korea", "Czechia"): "22:00",
+    ("2026-06-12", "Canada", "Bosnia and Herzegovina"): "15:00",
+    ("2026-06-12", "United States", "Paraguay"): "21:00",
+    ("2026-06-13", "Qatar", "Switzerland"): "15:00",
+    ("2026-06-13", "Brazil", "Morocco"): "18:00",
+    ("2026-06-13", "Haiti", "Scotland"): "21:00",
+    ("2026-06-14", "Australia", "Turkiye"): "00:00",
+    ("2026-06-14", "Australia", "Türkiye"): "00:00",
+    ("2026-06-14", "Australia", "T羹rkiye"): "00:00",
+    ("2026-06-14", "Germany", "Curacao"): "13:00",
+    ("2026-06-14", "Netherlands", "Japan"): "16:00",
+    ("2026-06-14", "Ivory Coast", "Ecuador"): "19:00",
+    ("2026-06-14", "Sweden", "Tunisia"): "22:00",
+    ("2026-06-15", "Spain", "Cabo Verde"): "12:00",
+    ("2026-06-15", "Belgium", "Egypt"): "15:00",
+    ("2026-06-15", "Saudi Arabia", "Uruguay"): "18:00",
+    ("2026-06-15", "Iran", "New Zealand"): "21:00",
+    ("2026-06-16", "France", "Senegal"): "15:00",
+    ("2026-06-16", "Iraq", "Norway"): "18:00",
+    ("2026-06-16", "Argentina", "Algeria"): "21:00",
+    ("2026-06-17", "Austria", "Jordan"): "00:00",
+    ("2026-06-17", "Portugal", "DR Congo"): "13:00",
+    ("2026-06-17", "England", "Croatia"): "16:00",
+    ("2026-06-17", "Ghana", "Panama"): "19:00",
+    ("2026-06-17", "Uzbekistan", "Colombia"): "22:00",
+    ("2026-06-18", "Czechia", "South Africa"): "12:00",
+    ("2026-06-18", "Switzerland", "Bosnia and Herzegovina"): "15:00",
+    ("2026-06-18", "Canada", "Qatar"): "18:00",
+    ("2026-06-18", "Mexico", "South Korea"): "21:00",
+    ("2026-06-19", "United States", "Australia"): "15:00",
+    ("2026-06-19", "Scotland", "Morocco"): "18:00",
+    ("2026-06-19", "Brazil", "Haiti"): "20:30",
+    ("2026-06-19", "Turkiye", "Paraguay"): "23:00",
+    ("2026-06-19", "Türkiye", "Paraguay"): "23:00",
+    ("2026-06-19", "T羹rkiye", "Paraguay"): "23:00",
+    ("2026-06-20", "Netherlands", "Sweden"): "13:00",
+    ("2026-06-20", "Germany", "Ivory Coast"): "16:00",
+    ("2026-06-20", "Ecuador", "Curacao"): "20:00",
+    ("2026-06-21", "Tunisia", "Japan"): "00:00",
+    ("2026-06-21", "Spain", "Saudi Arabia"): "12:00",
+    ("2026-06-21", "Belgium", "Iran"): "15:00",
+    ("2026-06-21", "Uruguay", "Cabo Verde"): "18:00",
+    ("2026-06-21", "New Zealand", "Egypt"): "21:00",
+    ("2026-06-22", "Argentina", "Austria"): "13:00",
+    ("2026-06-22", "France", "Iraq"): "17:00",
+    ("2026-06-22", "Norway", "Senegal"): "20:00",
+    ("2026-06-22", "Jordan", "Algeria"): "23:00",
+    ("2026-06-23", "Portugal", "Uzbekistan"): "13:00",
+    ("2026-06-23", "England", "Ghana"): "16:00",
+    ("2026-06-23", "Panama", "Croatia"): "19:00",
+    ("2026-06-23", "Colombia", "DR Congo"): "22:00",
+    ("2026-06-24", "Switzerland", "Canada"): "15:00",
+    ("2026-06-24", "Bosnia and Herzegovina", "Qatar"): "15:00",
+    ("2026-06-24", "Morocco", "Haiti"): "18:00",
+    ("2026-06-24", "Scotland", "Brazil"): "18:00",
+    ("2026-06-24", "South Africa", "South Korea"): "21:00",
+    ("2026-06-24", "Czechia", "Mexico"): "21:00",
+    ("2026-06-25", "Curacao", "Ivory Coast"): "16:00",
+    ("2026-06-25", "Ecuador", "Germany"): "16:00",
+    ("2026-06-25", "Tunisia", "Netherlands"): "19:00",
+    ("2026-06-25", "Japan", "Sweden"): "19:00",
+    ("2026-06-25", "Turkiye", "United States"): "22:00",
+    ("2026-06-25", "Türkiye", "United States"): "22:00",
+    ("2026-06-25", "T羹rkiye", "United States"): "22:00",
+    ("2026-06-25", "Paraguay", "Australia"): "22:00",
+    ("2026-06-26", "Norway", "France"): "15:00",
+    ("2026-06-26", "Senegal", "Iraq"): "15:00",
+    ("2026-06-26", "Cabo Verde", "Saudi Arabia"): "20:00",
+    ("2026-06-26", "Uruguay", "Spain"): "20:00",
+    ("2026-06-26", "New Zealand", "Belgium"): "23:00",
+    ("2026-06-26", "Egypt", "Iran"): "23:00",
+    ("2026-06-27", "Panama", "England"): "17:00",
+    ("2026-06-27", "Croatia", "Ghana"): "17:00",
+    ("2026-06-27", "Colombia", "Portugal"): "19:30",
+    ("2026-06-27", "DR Congo", "Uzbekistan"): "19:30",
+    ("2026-06-27", "Algeria", "Austria"): "22:00",
+    ("2026-06-27", "Jordan", "Argentina"): "22:00",
+}
+
+PAST_CHAMPIONS = [
+    (1930, "烏拉圭", "Estadio Centenario", "蒙特維多"),
+    (1934, "義大利", "Stadio Nazionale PNF", "羅馬"),
+    (1938, "義大利", "Stade Olympique de Colombes", "巴黎"),
+    (1950, "烏拉圭", "Maracanã Stadium", "里約熱內盧"),
+    (1954, "西德", "Wankdorf Stadium", "伯恩"),
+    (1958, "巴西", "Råsunda Stadium", "索爾納"),
+    (1962, "巴西", "Estadio Nacional", "聖地牙哥"),
+    (1966, "英格蘭", "Wembley Stadium", "倫敦"),
+    (1970, "巴西", "Estadio Azteca", "墨西哥城"),
+    (1974, "西德", "Olympiastadion", "慕尼黑"),
+    (1978, "阿根廷", "Estadio Monumental", "布宜諾斯艾利斯"),
+    (1982, "義大利", "Santiago Bernabéu", "馬德里"),
+    (1986, "阿根廷", "Estadio Azteca", "墨西哥城"),
+    (1990, "西德", "Stadio Olimpico", "羅馬"),
+    (1994, "巴西", "Rose Bowl", "帕薩迪納"),
+    (1998, "法國", "Stade de France", "聖但尼"),
+    (2002, "巴西", "International Stadium Yokohama", "橫濱"),
+    (2006, "義大利", "Olympiastadion", "柏林"),
+    (2010, "西班牙", "Soccer City", "約翰尼斯堡"),
+    (2014, "德國", "Maracanã Stadium", "里約熱內盧"),
+    (2018, "法國", "Luzhniki Stadium", "莫斯科"),
+    (2022, "阿根廷", "Lusail Stadium", "路薩爾"),
+]
+
 
 def signed(value):
     return f"+{value}" if value > 0 else str(value)
@@ -121,10 +232,31 @@ def team_label(name):
     return f'<span class="flag">{TEAM_FLAG.get(name, "🏳️")}</span><span>{team_name(name)}</span>'
 
 
+def kickoff_iso(match):
+    time_et = KICKOFF_ET.get((match["date"], match["home"], match["away"]))
+    if not time_et:
+        return None
+    hour, minute = map(int, time_et.split(":"))
+    # June dates use Eastern Daylight Time, UTC-4.
+    dt_et = datetime.fromisoformat(match["date"]).replace(hour=hour, minute=minute)
+    dt_utc = (dt_et + timedelta(hours=4)).replace(tzinfo=timezone.utc)
+    return dt_utc.isoformat().replace("+00:00", "Z")
+
+
+def kickoff_display(match):
+    iso = kickoff_iso(match)
+    if not iso:
+        return f'{match["date"][5:]}｜時間待確認'
+    dt_utc = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    tw = dt_utc.astimezone(timezone.utc).timestamp() + 8 * 3600
+    dt_tw = datetime.fromtimestamp(tw, tz=timezone.utc)
+    return dt_tw.strftime("%m-%d %H:%M 台灣時間")
+
+
 def fmt_score(match):
     if match.get("status") == "finished":
         return f'{match["home_score"]} - {match["away_score"]}'
-    return "對"
+    return "vs"
 
 
 def render_group(group):
@@ -153,7 +285,7 @@ def render_group(group):
         matches.append(
             f"""
             <li class="{status}">
-              <span class="date">{match["date"][5:]}</span>
+              <span class="date">{kickoff_display(match)}</span>
               <span class="fixture"><span class="team-label">{team_label(match["home"])}</span></span>
               <strong>{fmt_score(match)}</strong>
               <span class="fixture right"><span class="team-label">{team_label(match["away"])}</span></span>
@@ -186,14 +318,36 @@ def render_group(group):
 
 def next_match(data):
     upcoming = []
+    now = datetime.now(timezone.utc)
     for group in data["groups"]:
         for order, match in enumerate(group["matches"]):
-            if match.get("status") != "finished":
-                upcoming.append((match["date"], group["name"], order, match))
+            if match.get("status") == "finished":
+                continue
+            iso = kickoff_iso(match)
+            if iso and datetime.fromisoformat(iso.replace("Z", "+00:00")) <= now:
+                continue
+            sort_key = iso or f'{match["date"]}T23:59:59Z'
+            upcoming.append((sort_key, group["name"], order, match))
     if not upcoming:
         return None
     _, group_name, _, match = sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[0]
     return group_name, match
+
+
+def render_champions():
+    rows = []
+    for year, champion, venue, city in PAST_CHAMPIONS:
+        rows.append(
+            f"""
+            <tr>
+              <td>{year}</td>
+              <td>{champion}</td>
+              <td>{venue}</td>
+              <td>{city}</td>
+            </tr>
+            """
+        )
+    return "".join(rows)
 
 
 def main():
@@ -211,12 +365,14 @@ def main():
     upcoming = next_match(data)
     if upcoming:
         next_group, next_game = upcoming
+        next_iso = kickoff_iso(next_game) or ""
         next_text = (
-            f'{next_group} 組｜{next_game["date"][5:]}｜'
-            f'{TEAM_FLAG.get(next_game["home"], "")} {team_name(next_game["home"])} 對 '
+            f'{next_group} 組｜{kickoff_display(next_game)}｜'
+            f'{TEAM_FLAG.get(next_game["home"], "")} {team_name(next_game["home"])} vs '
             f'{TEAM_FLAG.get(next_game["away"], "")} {team_name(next_game["away"])}'
         )
     else:
+        next_iso = ""
         next_text = "小組賽已全部完賽"
 
     HTML_PATH.write_text(
@@ -249,189 +405,58 @@ def main():
         radial-gradient(circle at 75% 18%, rgba(23,105,224,.32), transparent 30%),
         #080808;
     }}
-    .brand-ribbon {{
-      height: 8px;
-      background: linear-gradient(90deg, var(--red), var(--gold-soft), var(--green), var(--blue));
-    }}
-    header {{
-      position: relative;
-      padding: 28px clamp(18px, 4vw, 54px) 18px;
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-    }}
-    .hero {{
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 24px;
-      align-items: end;
-      max-width: 1480px;
-      margin: 0 auto;
-    }}
-    .mark {{
-      font-size: clamp(86px, 13vw, 190px);
-      line-height: .78;
-      font-weight: 950;
-      letter-spacing: 0;
-      color: transparent;
-      -webkit-text-stroke: 2px rgba(255,255,255,.9);
-      text-shadow: 0 0 34px rgba(201,162,75,.28);
-    }}
-    h1 {{
-      margin: 0 0 10px;
-      font-size: clamp(28px, 5vw, 74px);
-      line-height: .96;
-      letter-spacing: 0;
-      max-width: 900px;
-    }}
-    .subline {{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }}
-    .pill {{
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 7px 10px;
-      background: rgba(255,255,255,.06);
-    }}
-    main {{
-      max-width: 1480px;
-      margin: 0 auto;
-      padding: 22px clamp(14px, 3vw, 42px) 44px;
-    }}
-    .summary {{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }}
-    .metric {{
-      min-height: 96px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.07);
-      backdrop-filter: blur(16px);
-    }}
+    .brand-ribbon {{ height: 8px; background: linear-gradient(90deg, var(--red), var(--gold-soft), var(--green), var(--blue)); }}
+    header {{ padding: 28px clamp(18px, 4vw, 54px) 18px; border-bottom: 1px solid var(--line); }}
+    .hero {{ display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; max-width: 1480px; margin: 0 auto; }}
+    .mark {{ font-size: clamp(86px, 13vw, 190px); line-height: .78; font-weight: 950; letter-spacing: 0; color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.9); text-shadow: 0 0 34px rgba(201,162,75,.28); }}
+    h1 {{ margin: 0 0 10px; font-size: clamp(28px, 5vw, 74px); line-height: .96; letter-spacing: 0; max-width: 900px; }}
+    .subline {{ display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 14px; }}
+    .pill {{ border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: rgba(255,255,255,.06); }}
+    main {{ max-width: 1480px; margin: 0 auto; padding: 22px clamp(14px, 3vw, 42px) 44px; }}
+    .summary {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }}
+    .metric {{ min-height: 96px; padding: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.07); backdrop-filter: blur(16px); }}
     .metric small {{ display: block; color: var(--muted); }}
     .metric strong {{ display: block; margin-top: 8px; font-size: clamp(24px, 4vw, 42px); }}
     .metric.wide {{ grid-column: 1 / -1; }}
-    .metric.wide strong {{
-      font-size: clamp(18px, 2.4vw, 30px);
-      line-height: 1.2;
-    }}
-    .grid {{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(340px, 1fr));
-      gap: 14px;
-    }}
-    .group-card {{
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.055));
-      backdrop-filter: blur(18px);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0,0,0,.22);
-    }}
-    .group-head {{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: linear-gradient(90deg, rgba(201,162,75,.32), rgba(255,255,255,.04));
-      border-bottom: 1px solid var(--line);
-    }}
-    .group-head p {{ margin: 0; color: var(--muted); text-transform: uppercase; font-size: 12px; }}
-    .group-head h2 {{ margin: 0; font-size: 34px; line-height: 1; color: var(--gold-soft); }}
-    table {{
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }}
-    th, td {{
-      padding: 9px 7px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      white-space: nowrap;
-    }}
-    th {{
-      color: var(--muted);
-      font-size: 11px;
-      text-transform: uppercase;
-      background: rgba(0,0,0,.18);
-    }}
-    .team-name {{ text-align: left; font-weight: 750; }}
-    .team-label {{
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-width: 0;
-      max-width: 100%;
-    }}
-    .flag {{
-      flex: 0 0 auto;
-      width: 1.45em;
-      display: inline-block;
-      text-align: center;
-      font-size: 1.08em;
-      line-height: 1;
-    }}
-    .rank {{
-      display: inline-grid;
-      place-items: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.09);
-      font-weight: 800;
-    }}
+    .metric.wide strong {{ font-size: clamp(18px, 2.4vw, 30px); line-height: 1.2; }}
+    .countdown {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
+    .countdown span {{ min-width: 72px; padding: 10px 12px; border: 1px solid rgba(246,223,154,.34); background: rgba(0,0,0,.24); text-align: center; font-weight: 900; font-variant-numeric: tabular-nums; }}
+    .countdown small {{ color: var(--muted); font-size: 11px; font-weight: 650; }}
+    .grid {{ display: grid; grid-template-columns: repeat(3, minmax(340px, 1fr)); gap: 14px; }}
+    .group-card, .history {{ border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.055)); backdrop-filter: blur(18px); border-radius: 8px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,.22); }}
+    .group-head, .history-head {{ display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: linear-gradient(90deg, rgba(201,162,75,.32), rgba(255,255,255,.04)); border-bottom: 1px solid var(--line); }}
+    .group-head p, .history-head p {{ margin: 0; color: var(--muted); text-transform: uppercase; font-size: 12px; }}
+    .group-head h2, .history-head h2 {{ margin: 0; font-size: 34px; line-height: 1; color: var(--gold-soft); }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
+    th, td {{ padding: 9px 7px; text-align: center; border-bottom: 1px solid rgba(255,255,255,.08); white-space: nowrap; }}
+    th {{ color: var(--muted); font-size: 11px; text-transform: uppercase; background: rgba(0,0,0,.18); }}
+    .team-name, .history td:nth-child(2), .history td:nth-child(3), .history td:nth-child(4) {{ text-align: left; font-weight: 750; }}
+    .team-label {{ display: inline-flex; align-items: center; gap: 7px; min-width: 0; max-width: 100%; }}
+    .flag {{ flex: 0 0 auto; width: 1.45em; display: inline-block; text-align: center; font-size: 1.08em; line-height: 1; }}
+    .rank {{ display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.09); font-weight: 800; }}
     tr.advance .rank {{ background: var(--gold-soft); color: var(--ink); }}
     tr.third .rank {{ border: 1px solid var(--gold); color: var(--gold-soft); }}
     .points {{ font-size: 16px; font-weight: 900; color: var(--gold-soft); }}
-    .match-list {{
-      list-style: none;
-      margin: 0;
-      padding: 10px 12px 14px;
-      display: grid;
-      gap: 7px;
-    }}
-    .match-list li {{
-      display: grid;
-      grid-template-columns: 44px minmax(0, 1fr) 48px minmax(0, 1fr);
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 7px 8px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(0,0,0,.18);
-      border-radius: 6px;
-      font-size: 12px;
-    }}
+    .match-list {{ list-style: none; margin: 0; padding: 10px 12px 14px; display: grid; gap: 7px; }}
+    .match-list li {{ display: grid; grid-template-columns: 96px minmax(0, 1fr) 48px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 38px; padding: 7px 8px; border: 1px solid rgba(255,255,255,.1); background: rgba(0,0,0,.18); border-radius: 6px; font-size: 12px; }}
     .match-list li.final {{ border-color: rgba(246,223,154,.42); }}
-    .date {{ color: var(--muted); font-variant-numeric: tabular-nums; }}
+    .date {{ color: var(--muted); font-variant-numeric: tabular-nums; white-space: normal; line-height: 1.25; }}
     .fixture {{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
     .fixture .team-label {{ max-width: 100%; }}
     .right {{ text-align: right; }}
     .match-list strong {{ color: var(--gold-soft); text-align: center; font-variant-numeric: tabular-nums; }}
-    footer {{
-      max-width: 1480px;
-      margin: 0 auto;
-      padding: 0 clamp(14px, 3vw, 42px) 28px;
-      color: var(--muted);
-      font-size: 12px;
-    }}
+    .history {{ margin-top: 18px; }}
+    .history-wrap {{ overflow-x: auto; }}
+    footer {{ max-width: 1480px; margin: 0 auto; padding: 0 clamp(14px, 3vw, 42px) 28px; color: var(--muted); font-size: 12px; }}
     a {{ color: var(--gold-soft); }}
-    @media (max-width: 1120px) {{
-      .grid {{ grid-template-columns: repeat(2, minmax(320px, 1fr)); }}
-    }}
+    @media (max-width: 1120px) {{ .grid {{ grid-template-columns: repeat(2, minmax(320px, 1fr)); }} }}
     @media (max-width: 740px) {{
       .hero {{ grid-template-columns: 1fr; }}
       .mark {{ font-size: 96px; }}
       .summary {{ grid-template-columns: 1fr; }}
       .grid {{ grid-template-columns: 1fr; }}
       th, td {{ padding: 8px 5px; font-size: 12px; }}
-      .match-list li {{ grid-template-columns: 42px 1fr 42px 1fr; }}
+      .match-list li {{ grid-template-columns: 86px 1fr 42px 1fr; }}
     }}
   </style>
 </head>
@@ -443,8 +468,8 @@ def main():
         <h1>FIFA World Cup 26 對戰與排名</h1>
         <div class="subline">
           <span class="pill">資料更新：{data["updated_at"]}</span>
-          <span class="pill">前二名直接晉級</span>
-          <span class="pill">8 個最佳第三名晉級 32 強</span>
+          <span class="pill">賽程時間：台灣時間</span>
+          <span class="pill">前二名直接晉級，8 個最佳第三名晉級 32 強</span>
         </div>
       </div>
       <div class="mark">26</div>
@@ -455,16 +480,59 @@ def main():
       <div class="metric"><small>小組</small><strong>{len(data["groups"])}</strong></div>
       <div class="metric"><small>已完賽</small><strong>{finished}/{total_matches}</strong></div>
       <div class="metric"><small>A 組目前領先</small><strong>{leaders}</strong></div>
-      <div class="metric wide"><small>下一場比賽</small><strong>{next_text}</strong></div>
+      <div class="metric wide">
+        <small>下一場比賽</small>
+        <strong>{next_text}</strong>
+        <div class="countdown" data-kickoff="{next_iso}">
+          <span><b data-days>--</b><br><small>天</small></span>
+          <span><b data-hours>--</b><br><small>小時</small></span>
+          <span><b data-minutes>--</b><br><small>分鐘</small></span>
+          <span><b data-seconds>--</b><br><small>秒</small></span>
+        </div>
+      </div>
     </section>
     <section class="grid">
       {groups_html}
     </section>
+    <section class="history">
+      <div class="history-head">
+        <p>歷史</p>
+        <h2>歷屆冠軍與決賽場地</h2>
+      </div>
+      <div class="history-wrap">
+        <table>
+          <thead><tr><th>年份</th><th>冠軍</th><th>決賽場地</th><th>城市</th></tr></thead>
+          <tbody>{render_champions()}</tbody>
+        </table>
+      </div>
+    </section>
   </main>
   <footer>
-    資料來源：<a href="{data["source"]["standings_url"]}">排名</a> · <a href="{data["source"]["schedule_url"]}">賽程</a>
+    資料來源：<a href="{data["source"]["standings_url"]}">排名</a> · <a href="{data["source"]["schedule_url"]}">賽程</a> · 歷屆冠軍與決賽場地參考 FIFA World Cup finals 資料整理
     <script type="application/json" id="dashboard-data">{payload}</script>
   </footer>
+  <script>
+    const countdown = document.querySelector("[data-kickoff]");
+    function pad(value) {{
+      return String(value).padStart(2, "0");
+    }}
+    function tickCountdown() {{
+      if (!countdown || !countdown.dataset.kickoff) return;
+      const target = new Date(countdown.dataset.kickoff).getTime();
+      const remaining = Math.max(0, target - Date.now());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      countdown.querySelector("[data-days]").textContent = days;
+      countdown.querySelector("[data-hours]").textContent = pad(hours);
+      countdown.querySelector("[data-minutes]").textContent = pad(minutes);
+      countdown.querySelector("[data-seconds]").textContent = pad(seconds);
+    }}
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+  </script>
 </body>
 </html>
 """,
