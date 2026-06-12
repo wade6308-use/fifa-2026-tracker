@@ -1,9 +1,9 @@
-name: 更新 FIFA World Cup 26 儀表板
+name: Update FIFA World Cup 26 Dashboard
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "2/5 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
@@ -12,18 +12,18 @@ jobs:
   update-dashboard:
     runs-on: ubuntu-latest
     steps:
-      - name: 取出儀表板原始碼
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 設定 Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: 抓取最新比分並重新產生頁面
+      - name: Fetch latest scores and regenerate dashboard
         run: python scripts/update_worldcup_2026.py
 
-      - name: 檢查是否有比分更新
+      - name: Check for changes
         id: changes
         run: |
           if [ -n "$(git status --porcelain)" ]; then
@@ -32,7 +32,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: 提交更新
+      - name: Commit updates
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
