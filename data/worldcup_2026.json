@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-12T23:27:30Z",
+  "updated_at": "2026-06-13T08:56:27Z",
   "source": {
     "standings_url": "https://www.sbnation.com/soccer/1117905/world-cup-standings-updated-full-list-of-teams",
     "schedule_url": "https://www.sbnation.com/soccer/1117513/world-cup-schedule-2026-how-to-watch-every-match-scores-and-more"
@@ -294,17 +294,17 @@
       "name": "D",
       "teams": [
         {
-          "team": "Australia",
-          "w": 0,
+          "team": "United States",
+          "w": 1,
           "d": 0,
           "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
+          "gf": 4,
+          "ga": 1,
+          "gd": 3,
+          "pts": 3
         },
         {
-          "team": "Paraguay",
+          "team": "Australia",
           "w": 0,
           "d": 0,
           "l": 0,
@@ -324,13 +324,13 @@
           "pts": 0
         },
         {
-          "team": "United States",
+          "team": "Paraguay",
           "w": 0,
           "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
+          "l": 1,
+          "gf": 1,
+          "ga": 4,
+          "gd": -3,
           "pts": 0
         }
       ],
@@ -339,9 +339,9 @@
           "date": "2026-06-12",
           "home": "United States",
           "away": "Paraguay",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 4,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-14",
