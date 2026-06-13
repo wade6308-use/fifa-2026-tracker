@@ -356,7 +356,7 @@ def current_match(data):
 
 def render_champions():
     rows = []
-    for year, champion, venue, city in PAST_CHAMPIONS:
+    for year, champion, venue, city in sorted(PAST_CHAMPIONS, reverse=True):
         rows.append(
             f"""
             <tr>
