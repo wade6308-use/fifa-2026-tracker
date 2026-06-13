@@ -334,6 +334,26 @@ def next_match(data):
     return group_name, match
 
 
+def current_match(data):
+    now = datetime.now(timezone.utc)
+    live_window = timedelta(minutes=150)
+    candidates = []
+    for group in data["groups"]:
+        for order, match in enumerate(group["matches"]):
+            if match.get("status") == "finished":
+                continue
+            iso = kickoff_iso(match)
+            if not iso:
+                continue
+            start = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+            if start <= now < start + live_window:
+                candidates.append((start, group["name"], order, match))
+    if not candidates:
+        return None
+    _, group_name, _, match = sorted(candidates, key=lambda item: (item[0], item[1], item[2]))[0]
+    return group_name, match
+
+
 def render_champions():
     rows = []
     for year, champion, venue, city in PAST_CHAMPIONS:
@@ -362,6 +382,20 @@ def main():
     groups_html = "\n".join(render_group(group) for group in data["groups"])
     payload = json.dumps(data, ensure_ascii=False)
     leaders = " / ".join(team_name(team["team"]) for team in data["groups"][0]["teams"][:2])
+    live = current_match(data)
+    if live:
+        live_group, live_game = live
+        if live_game.get("home_score") is not None and live_game.get("away_score") is not None:
+            live_score = f'{live_game["home_score"]} - {live_game["away_score"]}'
+        else:
+            live_score = "即時比分待更新"
+        live_text = (
+            f'{live_group} 組｜{kickoff_display(live_game)}｜'
+            f'{TEAM_FLAG.get(live_game["home"], "")} {team_name(live_game["home"])} vs '
+            f'{TEAM_FLAG.get(live_game["away"], "")} {team_name(live_game["away"])}｜{live_score}'
+        )
+    else:
+        live_text = "目前無進行中賽事"
     upcoming = next_match(data)
     if upcoming:
         next_group, next_game = upcoming
@@ -480,6 +514,10 @@ def main():
       <div class="metric"><small>小組</small><strong>{len(data["groups"])}</strong></div>
       <div class="metric"><small>已完賽</small><strong>{finished}/{total_matches}</strong></div>
       <div class="metric"><small>A 組目前領先</small><strong>{leaders}</strong></div>
+      <div class="metric wide">
+        <small>目前比賽</small>
+        <strong>{live_text}</strong>
+      </div>
       <div class="metric wide">
         <small>下一場比賽</small>
         <strong>{next_text}</strong>
