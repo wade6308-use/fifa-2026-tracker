@@ -3,7 +3,8 @@ name: Update FIFA World Cup 26 Dashboard
 on:
   workflow_dispatch:
   schedule:
-    - cron: "3,8,13,18,23,28,33,38,43,48,53,58 * * * *"
+    # 09:17 and 21:17 Asia/Taipei during the tournament.
+    - cron: "17 1,13 * * *"
 
 permissions:
   contents: write
