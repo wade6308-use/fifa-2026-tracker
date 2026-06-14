@@ -3,8 +3,183 @@ name: Update FIFA World Cup 26 Dashboard
 on:
   workflow_dispatch:
   schedule:
-    # 09:17 and 21:17 Asia/Taipei during the tournament.
-    - cron: "17 1,13 * * *"
+    # Auto-generated from group-stage kickoff times.
+    # Runs at every match kickoff and again 3 hours after kickoff.
+    # Times are UTC because GitHub Actions cron uses UTC.
+    # kickoff - Group A: Mexico vs South Africa
+    - cron: "0 19 11 6 *"
+    # kickoff +3h - Group A: Mexico vs South Africa
+    - cron: "0 22 11 6 *"
+    # kickoff - Group A: South Korea vs Czechia
+    - cron: "0 2 12 6 *"
+    # kickoff +3h - Group A: South Korea vs Czechia
+    - cron: "0 5 12 6 *"
+    # kickoff - Group B: Canada vs Bosnia and Herzegovina
+    - cron: "0 19 12 6 *"
+    # kickoff +3h - Group B: Canada vs Bosnia and Herzegovina
+    - cron: "0 22 12 6 *"
+    # kickoff - Group D: United States vs Paraguay
+    - cron: "0 1 13 6 *"
+    # kickoff +3h - Group D: United States vs Paraguay
+    - cron: "0 4 13 6 *"
+    # kickoff - Group B: Qatar vs Switzerland
+    - cron: "0 19 13 6 *"
+    # kickoff +3h - Group B: Qatar vs Switzerland (+1 more)
+    - cron: "0 22 13 6 *"
+    # kickoff +3h - Group C: Brazil vs Morocco (+1 more)
+    - cron: "0 1 14 6 *"
+    # kickoff +3h - Group C: Haiti vs Scotland (+1 more)
+    - cron: "0 4 14 6 *"
+    # kickoff +3h - Group D: Australia vs Turkiye
+    - cron: "0 7 14 6 *"
+    # kickoff - Group E: Germany vs Curacao
+    - cron: "0 17 14 6 *"
+    # kickoff +3h - Group E: Germany vs Curacao (+1 more)
+    - cron: "0 20 14 6 *"
+    # kickoff - Group E: Ivory Coast vs Ecuador (+1 more)
+    - cron: "0 23 14 6 *"
+    # kickoff +3h - Group E: Ivory Coast vs Ecuador (+1 more)
+    - cron: "0 2 15 6 *"
+    # kickoff +3h - Group F: Sweden vs Tunisia
+    - cron: "0 5 15 6 *"
+    # kickoff - Group H: Spain vs Cabo Verde
+    - cron: "0 16 15 6 *"
+    # kickoff - Group G: Belgium vs Egypt (+1 more)
+    - cron: "0 19 15 6 *"
+    # kickoff +3h - Group G: Belgium vs Egypt (+1 more)
+    - cron: "0 22 15 6 *"
+    # kickoff - Group G: Iran vs New Zealand (+1 more)
+    - cron: "0 1 16 6 *"
+    # kickoff +3h - Group G: Iran vs New Zealand
+    - cron: "0 4 16 6 *"
+    # kickoff - Group I: France vs Senegal
+    - cron: "0 19 16 6 *"
+    # kickoff +3h - Group I: France vs Senegal (+1 more)
+    - cron: "0 22 16 6 *"
+    # kickoff +3h - Group I: Iraq vs Norway (+1 more)
+    - cron: "0 1 17 6 *"
+    # kickoff +3h - Group J: Argentina vs Algeria (+1 more)
+    - cron: "0 4 17 6 *"
+    # kickoff +3h - Group J: Austria vs Jordan
+    - cron: "0 7 17 6 *"
+    # kickoff - Group K: Portugal vs DR Congo
+    - cron: "0 17 17 6 *"
+    # kickoff +3h - Group K: Portugal vs DR Congo (+1 more)
+    - cron: "0 20 17 6 *"
+    # kickoff +3h - Group L: England vs Croatia (+1 more)
+    - cron: "0 23 17 6 *"
+    # kickoff - Group K: Uzbekistan vs Colombia (+1 more)
+    - cron: "0 2 18 6 *"
+    # kickoff +3h - Group K: Uzbekistan vs Colombia
+    - cron: "0 5 18 6 *"
+    # kickoff - Group A: Czechia vs South Africa
+    - cron: "0 16 18 6 *"
+    # kickoff +3h - Group A: Czechia vs South Africa (+1 more)
+    - cron: "0 19 18 6 *"
+    # kickoff +3h - Group B: Switzerland vs Bosnia and Herzegovina (+1 more)
+    - cron: "0 22 18 6 *"
+    # kickoff - Group A: Mexico vs South Korea (+1 more)
+    - cron: "0 1 19 6 *"
+    # kickoff +3h - Group A: Mexico vs South Korea
+    - cron: "0 4 19 6 *"
+    # kickoff - Group D: United States vs Australia
+    - cron: "0 19 19 6 *"
+    # kickoff - Group C: Scotland vs Morocco (+1 more)
+    - cron: "0 22 19 6 *"
+    # kickoff - Group C: Brazil vs Haiti
+    - cron: "30 0 20 6 *"
+    # kickoff +3h - Group C: Scotland vs Morocco
+    - cron: "0 1 20 6 *"
+    # kickoff - Group D: Turkiye vs Paraguay
+    - cron: "0 3 20 6 *"
+    # kickoff +3h - Group C: Brazil vs Haiti
+    - cron: "30 3 20 6 *"
+    # kickoff +3h - Group D: Turkiye vs Paraguay
+    - cron: "0 6 20 6 *"
+    # kickoff - Group F: Netherlands vs Sweden
+    - cron: "0 17 20 6 *"
+    # kickoff - Group E: Germany vs Ivory Coast (+1 more)
+    - cron: "0 20 20 6 *"
+    # kickoff +3h - Group E: Germany vs Ivory Coast
+    - cron: "0 23 20 6 *"
+    # kickoff - Group E: Ecuador vs Curacao
+    - cron: "0 0 21 6 *"
+    # kickoff +3h - Group E: Ecuador vs Curacao
+    - cron: "0 3 21 6 *"
+    # kickoff - Group F: Tunisia vs Japan
+    - cron: "0 4 21 6 *"
+    # kickoff +3h - Group F: Tunisia vs Japan
+    - cron: "0 7 21 6 *"
+    # kickoff - Group H: Spain vs Saudi Arabia
+    - cron: "0 16 21 6 *"
+    # kickoff - Group G: Belgium vs Iran (+1 more)
+    - cron: "0 19 21 6 *"
+    # kickoff +3h - Group G: Belgium vs Iran (+1 more)
+    - cron: "0 22 21 6 *"
+    # kickoff - Group G: New Zealand vs Egypt (+1 more)
+    - cron: "0 1 22 6 *"
+    # kickoff +3h - Group G: New Zealand vs Egypt
+    - cron: "0 4 22 6 *"
+    # kickoff - Group J: Argentina vs Austria
+    - cron: "0 17 22 6 *"
+    # kickoff +3h - Group J: Argentina vs Austria
+    - cron: "0 20 22 6 *"
+    # kickoff - Group I: France vs Iraq
+    - cron: "0 21 22 6 *"
+    # kickoff +3h - Group I: France vs Iraq (+1 more)
+    - cron: "0 0 23 6 *"
+    # kickoff +3h - Group I: Norway vs Senegal (+1 more)
+    - cron: "0 3 23 6 *"
+    # kickoff +3h - Group J: Jordan vs Algeria
+    - cron: "0 6 23 6 *"
+    # kickoff - Group K: Portugal vs Uzbekistan
+    - cron: "0 17 23 6 *"
+    # kickoff +3h - Group K: Portugal vs Uzbekistan (+1 more)
+    - cron: "0 20 23 6 *"
+    # kickoff +3h - Group L: England vs Ghana (+1 more)
+    - cron: "0 23 23 6 *"
+    # kickoff - Group K: Colombia vs DR Congo (+1 more)
+    - cron: "0 2 24 6 *"
+    # kickoff +3h - Group K: Colombia vs DR Congo
+    - cron: "0 5 24 6 *"
+    # kickoff - Group B: Switzerland vs Canada (+1 more)
+    - cron: "0 19 24 6 *"
+    # kickoff +3h - Group B: Switzerland vs Canada (+3 more)
+    - cron: "0 22 24 6 *"
+    # kickoff - Group A: South Africa vs South Korea (+3 more)
+    - cron: "0 1 25 6 *"
+    # kickoff +3h - Group A: South Africa vs South Korea (+1 more)
+    - cron: "0 4 25 6 *"
+    # kickoff - Group E: Curacao vs Ivory Coast (+1 more)
+    - cron: "0 20 25 6 *"
+    # kickoff +3h - Group E: Curacao vs Ivory Coast (+3 more)
+    - cron: "0 23 25 6 *"
+    # kickoff - Group D: Turkiye vs United States (+3 more)
+    - cron: "0 2 26 6 *"
+    # kickoff +3h - Group D: Turkiye vs United States (+1 more)
+    - cron: "0 5 26 6 *"
+    # kickoff - Group I: Norway vs France (+1 more)
+    - cron: "0 19 26 6 *"
+    # kickoff +3h - Group I: Norway vs France (+1 more)
+    - cron: "0 22 26 6 *"
+    # kickoff - Group H: Cabo Verde vs Saudi Arabia (+1 more)
+    - cron: "0 0 27 6 *"
+    # kickoff - Group G: New Zealand vs Belgium (+3 more)
+    - cron: "0 3 27 6 *"
+    # kickoff +3h - Group G: New Zealand vs Belgium (+1 more)
+    - cron: "0 6 27 6 *"
+    # kickoff - Group L: Panama vs England (+1 more)
+    - cron: "0 21 27 6 *"
+    # kickoff - Group K: Colombia vs Portugal (+1 more)
+    - cron: "30 23 27 6 *"
+    # kickoff +3h - Group L: Panama vs England (+1 more)
+    - cron: "0 0 28 6 *"
+    # kickoff - Group J: Algeria vs Austria (+1 more)
+    - cron: "0 2 28 6 *"
+    # kickoff +3h - Group K: Colombia vs Portugal (+1 more)
+    - cron: "30 2 28 6 *"
+    # kickoff +3h - Group J: Algeria vs Austria (+1 more)
+    - cron: "0 5 28 6 *"
 
 permissions:
   contents: write
