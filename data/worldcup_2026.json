@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-13T08:56:27Z",
+  "updated_at": "2026-06-14T05:02:54Z",
   "source": {
     "standings_url": "https://www.sbnation.com/soccer/1117905/world-cup-standings-updated-full-list-of-teams",
     "schedule_url": "https://www.sbnation.com/soccer/1117513/world-cup-schedule-2026-how-to-watch-every-match-scores-and-more"
@@ -126,22 +126,22 @@
         {
           "team": "Qatar",
           "w": 0,
-          "d": 0,
+          "d": 1,
           "l": 0,
-          "gf": 0,
-          "ga": 0,
+          "gf": 1,
+          "ga": 1,
           "gd": 0,
-          "pts": 0
+          "pts": 1
         },
         {
           "team": "Switzerland",
           "w": 0,
-          "d": 0,
+          "d": 1,
           "l": 0,
-          "gf": 0,
-          "ga": 0,
+          "gf": 1,
+          "ga": 1,
           "gd": 0,
-          "pts": 0
+          "pts": 1
         }
       ],
       "matches": [
@@ -157,9 +157,9 @@
           "date": "2026-06-13",
           "home": "Qatar",
           "away": "Switzerland",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-18",
@@ -199,43 +199,43 @@
       "name": "C",
       "teams": [
         {
-          "team": "Brazil",
-          "w": 0,
+          "team": "Scotland",
+          "w": 1,
           "d": 0,
           "l": 0,
-          "gf": 0,
+          "gf": 1,
           "ga": 0,
+          "gd": 1,
+          "pts": 3
+        },
+        {
+          "team": "Brazil",
+          "w": 0,
+          "d": 1,
+          "l": 0,
+          "gf": 1,
+          "ga": 1,
           "gd": 0,
-          "pts": 0
+          "pts": 1
+        },
+        {
+          "team": "Morocco",
+          "w": 0,
+          "d": 1,
+          "l": 0,
+          "gf": 1,
+          "ga": 1,
+          "gd": 0,
+          "pts": 1
         },
         {
           "team": "Haiti",
           "w": 0,
           "d": 0,
-          "l": 0,
+          "l": 1,
           "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
-        },
-        {
-          "team": "Morocco",
-          "w": 0,
-          "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
-        },
-        {
-          "team": "Scotland",
-          "w": 0,
-          "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
+          "ga": 1,
+          "gd": -1,
           "pts": 0
         }
       ],
@@ -244,17 +244,17 @@
           "date": "2026-06-13",
           "home": "Brazil",
           "away": "Morocco",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-13",
           "home": "Haiti",
           "away": "Scotland",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-19",
