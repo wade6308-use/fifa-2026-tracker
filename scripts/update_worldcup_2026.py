@@ -1,6 +1,5 @@
 import argparse
 import json
-import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -8,55 +7,68 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "worldcup_2026.json"
 GENERATOR = ROOT / "scripts" / "generate_dashboard.py"
+FIFA_MATCHES_URL = "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
+FIFA_NAME_MAP = {
+    "Congo DR": "DR Congo",
+    "Côte d'Ivoire": "Ivory Coast",
+    "Curaçao": "Curacao",
+    "IR Iran": "Iran",
+    "Korea Republic": "South Korea",
+    "USA": "United States",
+}
 
 
-def fetch_text(url):
+def fetch_json(url):
     request = Request(
         url,
         headers={
-            "User-Agent": "Mozilla/5.0 FIFA-2026-local-dashboard/1.0",
-            "Accept": "text/html,application/xhtml+xml",
+            "User-Agent": "Mozilla/5.0 FIFA-2026-dashboard/1.0",
+            "Accept": "application/json",
         },
     )
     with urlopen(request, timeout=30) as response:
         raw = response.read()
-    return raw.decode("utf-8", errors="replace")
+    return json.loads(raw.decode("utf-8", errors="replace"))
 
 
-def compact_text(html):
-    text = re.sub(r"<script[\s\S]*?</script>", " ", html, flags=re.I)
-    text = re.sub(r"<style[\s\S]*?</style>", " ", text, flags=re.I)
-    text = re.sub(r"<[^>]+>", " ", text)
-    text = re.sub(r"&nbsp;", " ", text)
-    text = re.sub(r"&#8217;|&rsquo;", "'", text)
-    text = re.sub(r"&amp;", "&", text)
-    text = re.sub(r"\s+", " ", text)
-    return text.replace("Türkiye", "Turkiye")
+def localized_description(values):
+    if not values:
+        return ""
+    for value in values:
+        if value.get("Locale", "").lower() in {"en-gb", "en"}:
+            return value.get("Description", "")
+    return values[0].get("Description", "")
 
 
-def normalized_name(name):
-    return name.replace("Türkiye", "Turkiye")
+def canonical_team(name):
+    return FIFA_NAME_MAP.get(name, name)
 
 
-def find_score(text, home, away):
-    home = normalized_name(home)
-    away = normalized_name(away)
-    patterns = [
-        rf"{re.escape(home)}\s+(\d+)\s*,\s*{re.escape(away)}\s+(\d+)",
-        rf"{re.escape(away)}\s+(\d+)\s*,\s*{re.escape(home)}\s+(\d+)",
-    ]
-    for index, pattern in enumerate(patterns):
-        match = re.search(pattern, text, flags=re.I)
-        if not match:
-            continue
-        first, second = int(match.group(1)), int(match.group(2))
-        if index == 0:
-            return first, second
-        return second, first
-    return None
+def fifa_team_name(team):
+    if not team:
+        return None
+    name = team.get("ShortClubName") or localized_description(team.get("TeamName"))
+    return canonical_team(name)
+
+
+def match_key(home, away):
+    return (canonical_team(home), canonical_team(away))
+
+
+def fifa_matches_by_key(fifa_data):
+    matches = {}
+    for item in fifa_data.get("Results", []):
+        home = fifa_team_name(item.get("Home"))
+        away = fifa_team_name(item.get("Away"))
+        if home and away:
+            matches[match_key(home, away)] = item
+    return matches
 
 
 def reset_table(group):
@@ -97,32 +109,60 @@ def recalc_group(group):
     group["teams"].sort(key=lambda team: (-team["pts"], -team["gd"], -team["gf"], team["team"]))
 
 
+def fifa_status(item):
+    has_score = item.get("HomeTeamScore") is not None and item.get("AwayTeamScore") is not None
+    if has_score and item.get("ResultType") == 1:
+        return "finished"
+    if has_score:
+        return "live"
+    return "scheduled"
+
+
 def update_from_sources(data, dry_run=False):
-    pages = []
-    for url in [data["source"]["standings_url"], data["source"]["schedule_url"]]:
-        pages.append(compact_text(fetch_text(url)))
-    source_text = " ".join(pages)
+    fifa_url = data.get("source", {}).get("fifa_matches_url", FIFA_MATCHES_URL)
+    fifa_matches = fifa_matches_by_key(fetch_json(fifa_url))
 
     changed = []
+    missing = []
     for group in data["groups"]:
         for match in group["matches"]:
-            score = find_score(source_text, match["home"], match["away"])
-            if not score:
+            key = match_key(match["home"], match["away"])
+            fifa_match = fifa_matches.get(key)
+            if not fifa_match:
+                missing.append(f'Group {group["name"]}: {match["home"]} vs {match["away"]}')
                 continue
+
+            status = fifa_status(fifa_match)
+            home_score = fifa_match.get("HomeTeamScore")
+            away_score = fifa_match.get("AwayTeamScore")
+            if status == "scheduled":
+                home_score = None
+                away_score = None
+
             old = (match.get("home_score"), match.get("away_score"), match.get("status"))
-            match["home_score"], match["away_score"] = score
-            match["status"] = "finished"
+            match["home_score"] = home_score
+            match["away_score"] = away_score
+            match["status"] = status
             new = (match["home_score"], match["away_score"], match["status"])
             if old != new:
-                changed.append(f'Group {group["name"]}: {match["home"]} {score[0]}-{score[1]} {match["away"]}')
+                score_text = "scheduled"
+                if home_score is not None and away_score is not None:
+                    score_text = f"{home_score}-{away_score}"
+                changed.append(f'Group {group["name"]}: {match["home"]} {score_text} {match["away"]} ({status})')
 
     for group in data["groups"]:
         recalc_group(group)
+
+    if missing:
+        print("Warning: FIFA API matches not found for:")
+        for item in missing:
+            print(f"- {item}")
 
     if not changed:
         return changed
 
     data["updated_at"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    data["source"] = {"fifa_matches_url": FIFA_MATCHES_URL}
     if not dry_run:
         DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         subprocess.run([sys.executable, str(GENERATOR)], check=True)
@@ -130,7 +170,7 @@ def update_from_sources(data, dry_run=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Update the FIFA World Cup 26 dashboard from public score pages.")
+    parser = argparse.ArgumentParser(description="Update the FIFA World Cup 26 dashboard from FIFA's public match API.")
     parser.add_argument("--dry-run", action="store_true", help="Fetch and report changes without writing files.")
     args = parser.parse_args()
 
@@ -141,7 +181,7 @@ def main():
         for item in changed:
             print(f"- {item}")
     else:
-        print("No new finished matches found.")
+        print("No new match updates found.")
 
 
 if __name__ == "__main__":

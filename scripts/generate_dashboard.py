@@ -381,6 +381,11 @@ def main():
     )
     groups_html = "\n".join(render_group(group) for group in data["groups"])
     payload = json.dumps(data, ensure_ascii=False)
+    source = data.get("source", {})
+    if source.get("fifa_matches_url"):
+        source_links = f'資料來源：<a href="{source["fifa_matches_url"]}">FIFA 官方賽程與比分 API</a> · 歷屆冠軍與決賽場地參考 FIFA World Cup finals 資料整理'
+    else:
+        source_links = f'資料來源：<a href="{source.get("standings_url", "#")}">排名</a> · <a href="{source.get("schedule_url", "#")}">賽程</a> · 歷屆冠軍與決賽場地參考 FIFA World Cup finals 資料整理'
     leaders = " / ".join(team_name(team["team"]) for team in data["groups"][0]["teams"][:2])
     live = current_match(data)
     if live:
@@ -546,7 +551,7 @@ def main():
     </section>
   </main>
   <footer>
-    資料來源：<a href="{data["source"]["standings_url"]}">排名</a> · <a href="{data["source"]["schedule_url"]}">賽程</a> · 歷屆冠軍與決賽場地參考 FIFA World Cup finals 資料整理
+    {source_links}
     <script type="application/json" id="dashboard-data">{payload}</script>
   </footer>
   <script>
