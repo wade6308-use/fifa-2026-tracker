@@ -6,6 +6,8 @@ on:
     # Auto-generated from group-stage kickoff times.
     # Runs at every match kickoff and again 3 hours after kickoff.
     # Times are UTC because GitHub Actions cron uses UTC.
+    # Fallback: check every 30 minutes during the group stage, offset from the top of the hour.
+    - cron: "17,47 * 11-28 6 *"
     # kickoff - Group A: Mexico vs South Africa
     - cron: "0 19 11 6 *"
     # kickoff +3h - Group A: Mexico vs South Africa
