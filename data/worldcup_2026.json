@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-15T22:52:36Z",
+  "updated_at": "2026-06-16T00:19:26Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -673,6 +673,26 @@
       "name": "H",
       "teams": [
         {
+          "team": "Saudi Arabia",
+          "w": 0,
+          "d": 1,
+          "l": 0,
+          "gf": 1,
+          "ga": 1,
+          "gd": 0,
+          "pts": 1
+        },
+        {
+          "team": "Uruguay",
+          "w": 0,
+          "d": 1,
+          "l": 0,
+          "gf": 1,
+          "ga": 1,
+          "gd": 0,
+          "pts": 1
+        },
+        {
           "team": "Cabo Verde",
           "w": 0,
           "d": 1,
@@ -691,26 +711,6 @@
           "ga": 0,
           "gd": 0,
           "pts": 1
-        },
-        {
-          "team": "Saudi Arabia",
-          "w": 0,
-          "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
-        },
-        {
-          "team": "Uruguay",
-          "w": 0,
-          "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
         }
       ],
       "matches": [
@@ -727,8 +727,8 @@
           "home": "Saudi Arabia",
           "away": "Uruguay",
           "home_score": 1,
-          "away_score": 0,
-          "status": "live"
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-21",
