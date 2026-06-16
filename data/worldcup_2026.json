@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-16T11:29:12Z",
+  "updated_at": "2026-06-16T23:51:02Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -769,13 +769,13 @@
       "teams": [
         {
           "team": "France",
-          "w": 0,
+          "w": 1,
           "d": 0,
           "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
-          "pts": 0
+          "gf": 3,
+          "ga": 1,
+          "gd": 2,
+          "pts": 3
         },
         {
           "team": "Iraq",
@@ -801,10 +801,10 @@
           "team": "Senegal",
           "w": 0,
           "d": 0,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
+          "l": 1,
+          "gf": 1,
+          "ga": 3,
+          "gd": -2,
           "pts": 0
         }
       ],
@@ -813,17 +813,17 @@
           "date": "2026-06-16",
           "home": "France",
           "away": "Senegal",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 3,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-16",
           "home": "Iraq",
           "away": "Norway",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 3,
+          "status": "live"
         },
         {
           "date": "2026-06-22",
