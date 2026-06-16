@@ -1,4 +1,4 @@
-import json
+﻿import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -60,59 +60,57 @@ TEAM_ZH = {
     "Panama": "巴拿馬",
 }
 
-TEAM_FLAG = {
-    "Mexico": "🇲🇽",
-    "South Korea": "🇰🇷",
-    "Czechia": "🇨🇿",
-    "South Africa": "🇿🇦",
-    "Canada": "🇨🇦",
-    "Bosnia and Herzegovina": "🇧🇦",
-    "Qatar": "🇶🇦",
-    "Switzerland": "🇨🇭",
-    "Brazil": "🇧🇷",
-    "Morocco": "🇲🇦",
-    "Haiti": "🇭🇹",
-    "Scotland": "🏴",
-    "United States": "🇺🇸",
-    "Paraguay": "🇵🇾",
-    "Australia": "🇦🇺",
-    "Turkiye": "🇹🇷",
-    "Türkiye": "🇹🇷",
-    "T羹rkiye": "🇹🇷",
-    "Germany": "🇩🇪",
-    "Curacao": "🇨🇼",
-    "Ivory Coast": "🇨🇮",
-    "Ecuador": "🇪🇨",
-    "Netherlands": "🇳🇱",
-    "Japan": "🇯🇵",
-    "Sweden": "🇸🇪",
-    "Tunisia": "🇹🇳",
-    "Belgium": "🇧🇪",
-    "Egypt": "🇪🇬",
-    "Iran": "🇮🇷",
-    "New Zealand": "🇳🇿",
-    "Spain": "🇪🇸",
-    "Cabo Verde": "🇨🇻",
-    "Saudi Arabia": "🇸🇦",
-    "Uruguay": "🇺🇾",
-    "France": "🇫🇷",
-    "Senegal": "🇸🇳",
-    "Iraq": "🇮🇶",
-    "Norway": "🇳🇴",
-    "Argentina": "🇦🇷",
-    "Algeria": "🇩🇿",
-    "Austria": "🇦🇹",
-    "Jordan": "🇯🇴",
-    "Portugal": "🇵🇹",
-    "DR Congo": "🇨🇩",
-    "Uzbekistan": "🇺🇿",
-    "Colombia": "🇨🇴",
-    "England": "🏴",
-    "Croatia": "🇭🇷",
-    "Ghana": "🇬🇭",
-    "Panama": "🇵🇦",
+TEAM_FLAG_CODE = {
+    "Mexico": "mx",
+    "South Korea": "kr",
+    "Czechia": "cz",
+    "South Africa": "za",
+    "Canada": "ca",
+    "Bosnia and Herzegovina": "ba",
+    "Qatar": "qa",
+    "Switzerland": "ch",
+    "Brazil": "br",
+    "Morocco": "ma",
+    "Haiti": "ht",
+    "Scotland": "gb-sct",
+    "United States": "us",
+    "Paraguay": "py",
+    "Australia": "au",
+    "Turkiye": "tr",
+    "Türkiye": "tr",
+    "Germany": "de",
+    "Curacao": "cw",
+    "Ivory Coast": "ci",
+    "Ecuador": "ec",
+    "Netherlands": "nl",
+    "Japan": "jp",
+    "Sweden": "se",
+    "Tunisia": "tn",
+    "Belgium": "be",
+    "Egypt": "eg",
+    "Iran": "ir",
+    "New Zealand": "nz",
+    "Spain": "es",
+    "Cabo Verde": "cv",
+    "Saudi Arabia": "sa",
+    "Uruguay": "uy",
+    "France": "fr",
+    "Senegal": "sn",
+    "Iraq": "iq",
+    "Norway": "no",
+    "Argentina": "ar",
+    "Algeria": "dz",
+    "Austria": "at",
+    "Jordan": "jo",
+    "Portugal": "pt",
+    "DR Congo": "cd",
+    "Uzbekistan": "uz",
+    "Colombia": "co",
+    "England": "gb-eng",
+    "Croatia": "hr",
+    "Ghana": "gh",
+    "Panama": "pa",
 }
-
 KICKOFF_ET = {
     ("2026-06-11", "Mexico", "South Africa"): "15:00",
     ("2026-06-11", "South Korea", "Czechia"): "22:00",
@@ -228,9 +226,15 @@ def team_name(name):
     return TEAM_ZH.get(name, name)
 
 
-def team_label(name):
-    return f'<span class="flag">{TEAM_FLAG.get(name, "🏳️")}</span><span>{team_name(name)}</span>'
+def flag_img(name):
+    code = TEAM_FLAG_CODE.get(name)
+    if not code:
+        return '<span class="flag fallback" aria-hidden="true"></span>'
+    return f'<img class="flag" src="assets/flags/{code}.svg" alt="" decoding="async">'
 
+
+def team_label(name):
+    return f'{flag_img(name)}<span>{team_name(name)}</span>'
 
 def kickoff_iso(match):
     time_et = KICKOFF_ET.get((match["date"], match["home"], match["away"]))
@@ -396,8 +400,8 @@ def main():
             live_score = "即時比分待更新"
         live_text = (
             f'{live_group} 組｜{kickoff_display(live_game)}｜'
-            f'{TEAM_FLAG.get(live_game["home"], "")} {team_name(live_game["home"])} vs '
-            f'{TEAM_FLAG.get(live_game["away"], "")} {team_name(live_game["away"])}｜{live_score}'
+            f'<span class="team-label">{team_label(live_game["home"])}</span> vs '
+            f'<span class="team-label">{team_label(live_game["away"])}</span>｜{live_score}'
         )
     else:
         live_text = "目前無進行中賽事"
@@ -407,8 +411,8 @@ def main():
         next_iso = kickoff_iso(next_game) or ""
         next_text = (
             f'{next_group} 組｜{kickoff_display(next_game)}｜'
-            f'{TEAM_FLAG.get(next_game["home"], "")} {team_name(next_game["home"])} vs '
-            f'{TEAM_FLAG.get(next_game["away"], "")} {team_name(next_game["away"])}'
+            f'<span class="team-label">{team_label(next_game["home"])}</span> vs '
+            f'<span class="team-label">{team_label(next_game["away"])}</span>'
         )
     else:
         next_iso = ""
@@ -471,7 +475,8 @@ def main():
     th {{ color: var(--muted); font-size: 11px; text-transform: uppercase; background: rgba(0,0,0,.18); }}
     .team-name, .history td:nth-child(2), .history td:nth-child(3), .history td:nth-child(4) {{ text-align: left; font-weight: 750; }}
     .team-label {{ display: inline-flex; align-items: center; gap: 7px; min-width: 0; max-width: 100%; }}
-    .flag {{ flex: 0 0 auto; width: 1.45em; display: inline-block; text-align: center; font-size: 1.08em; line-height: 1; }}
+    .flag {{ flex: 0 0 auto; width: 22px; height: 16px; display: inline-block; border-radius: 2px; object-fit: cover; box-shadow: 0 0 0 1px rgba(255,255,255,.22); background: rgba(255,255,255,.12); }}
+    .flag.fallback {{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }}
     .rank {{ display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.09); font-weight: 800; }}
     tr.advance .rank {{ background: var(--gold-soft); color: var(--ink); }}
     tr.third .rank {{ border: 1px solid var(--gold); color: var(--gold-soft); }}
