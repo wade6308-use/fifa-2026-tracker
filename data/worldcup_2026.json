@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-19T19:16:07Z",
+  "updated_at": "2026-06-19T22:16:05Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -259,9 +259,9 @@
           "date": "2026-06-19",
           "home": "Scotland",
           "away": "Morocco",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 1,
+          "status": "live"
         },
         {
           "date": "2026-06-19",
@@ -294,22 +294,22 @@
       "teams": [
         {
           "team": "United States",
-          "w": 1,
+          "w": 2,
           "d": 0,
           "l": 0,
-          "gf": 4,
+          "gf": 6,
           "ga": 1,
-          "gd": 3,
-          "pts": 3
+          "gd": 5,
+          "pts": 6
         },
         {
           "team": "Australia",
           "w": 1,
           "d": 0,
-          "l": 0,
+          "l": 1,
           "gf": 2,
-          "ga": 0,
-          "gd": 2,
+          "ga": 2,
+          "gd": 0,
           "pts": 3
         },
         {
@@ -354,9 +354,9 @@
           "date": "2026-06-19",
           "home": "United States",
           "away": "Australia",
-          "home_score": 1,
+          "home_score": 2,
           "away_score": 0,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-19",
