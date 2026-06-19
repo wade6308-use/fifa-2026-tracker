@@ -320,7 +320,7 @@ def render_group(group):
     """
 
 
-def next_match(data):
+def upcoming_matches(data, limit=3):
     upcoming = []
     now = datetime.now(timezone.utc)
     for group in data["groups"]:
@@ -332,10 +332,17 @@ def next_match(data):
                 continue
             sort_key = iso or f'{match["date"]}T23:59:59Z'
             upcoming.append((sort_key, group["name"], order, match))
+    return [
+        (group_name, match)
+        for _, group_name, _, match in sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[:limit]
+    ]
+
+
+def next_match(data):
+    upcoming = upcoming_matches(data, 1)
     if not upcoming:
         return None
-    _, group_name, _, match = sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[0]
-    return group_name, match
+    return upcoming[0]
 
 
 def current_match(data):
@@ -356,6 +363,34 @@ def current_match(data):
         return None
     _, group_name, _, match = sorted(candidates, key=lambda item: (item[0], item[1], item[2]))[0]
     return group_name, match
+
+
+def render_upcoming_panel(matches):
+    if not matches:
+        return '<div class="upcoming-panel" role="tooltip"><p>目前沒有接續賽事</p></div>'
+    rows = []
+    for index, (group_name, match) in enumerate(matches, start=1):
+        rows.append(
+            "\n".join(
+                [
+                    "            <li>",
+                    f'              <span class="queue-index">{index}</span>',
+                    f'              <span class="queue-meta">{group_name} 組｜{kickoff_display(match)}</span>',
+                    f'              <strong><span class="team-label">{team_label(match["home"])}</span> vs <span class="team-label">{team_label(match["away"])}</span></strong>',
+                    "            </li>",
+                ]
+            )
+        )
+    return "\n".join(
+        [
+            '        <div class="upcoming-panel" role="tooltip">',
+            "          <small>接下來三場比賽</small>",
+            "          <ol>",
+            "\n".join(rows),
+            "          </ol>",
+            "        </div>",
+        ]
+    )
 
 
 def render_champions():
@@ -405,9 +440,9 @@ def main():
         )
     else:
         live_text = "目前無進行中賽事"
-    upcoming = next_match(data)
+    upcoming = upcoming_matches(data, 3)
     if upcoming:
-        next_group, next_game = upcoming
+        next_group, next_game = upcoming[0]
         next_iso = kickoff_iso(next_game) or ""
         next_text = (
             f'{next_group} 組｜{kickoff_display(next_game)}｜'
@@ -417,6 +452,7 @@ def main():
     else:
         next_iso = ""
         next_text = "小組賽已全部完賽"
+    upcoming_panel = render_upcoming_panel(upcoming)
 
     HTML_PATH.write_text(
         f"""<!doctype html>
@@ -456,16 +492,25 @@ def main():
     .subline {{ display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 14px; }}
     .pill {{ border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: rgba(255,255,255,.06); }}
     main {{ max-width: 1480px; margin: 0 auto; padding: 22px clamp(14px, 3vw, 42px) 44px; }}
-    .summary {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }}
+    .summary {{ position: relative; z-index: 30; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }}
     .metric {{ min-height: 96px; padding: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.07); backdrop-filter: blur(16px); }}
     .metric small {{ display: block; color: var(--muted); }}
     .metric strong {{ display: block; margin-top: 8px; font-size: clamp(24px, 4vw, 42px); }}
     .metric.wide {{ grid-column: 1 / -1; }}
     .metric.wide strong {{ font-size: clamp(18px, 2.4vw, 30px); line-height: 1.2; }}
+    .next-metric {{ position: relative; z-index: 40; }}
+    .upcoming-panel {{ position: absolute; z-index: 60; left: 16px; right: 16px; top: calc(100% + 8px); opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .16s ease, transform .16s ease; padding: 14px; border: 1px solid rgba(246,223,154,.45); background: rgba(8,12,18,.98); box-shadow: 0 18px 36px rgba(0,0,0,.42); backdrop-filter: blur(18px); }}
+    .next-metric:hover .upcoming-panel, .next-metric:focus-within .upcoming-panel {{ opacity: 1; transform: translateY(0); pointer-events: auto; }}
+    .upcoming-panel small {{ color: var(--gold-soft); font-weight: 850; }}
+    .upcoming-panel ol {{ list-style: none; display: grid; gap: 8px; margin: 10px 0 0; padding: 0; }}
+    .upcoming-panel li {{ display: grid; grid-template-columns: 28px minmax(120px, .35fr) minmax(0, 1fr); align-items: center; gap: 10px; padding: 9px 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.055); }}
+    .queue-index {{ display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--gold-soft); color: var(--ink); font-weight: 900; }}
+    .queue-meta {{ color: var(--muted); font-size: 13px; font-weight: 750; }}
+    .upcoming-panel li strong {{ margin: 0; font-size: 15px; line-height: 1.25; }}
     .countdown {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
     .countdown span {{ min-width: 72px; padding: 10px 12px; border: 1px solid rgba(246,223,154,.34); background: rgba(0,0,0,.24); text-align: center; font-weight: 900; font-variant-numeric: tabular-nums; }}
     .countdown small {{ color: var(--muted); font-size: 11px; font-weight: 650; }}
-    .grid {{ display: grid; grid-template-columns: repeat(3, minmax(340px, 1fr)); gap: 14px; }}
+    .grid {{ position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(340px, 1fr)); gap: 14px; }}
     .group-card, .history {{ border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.055)); backdrop-filter: blur(18px); border-radius: 8px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,.22); }}
     .group-head, .history-head {{ display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: linear-gradient(90deg, rgba(201,162,75,.32), rgba(255,255,255,.04)); border-bottom: 1px solid var(--line); }}
     .group-head p, .history-head p {{ margin: 0; color: var(--muted); text-transform: uppercase; font-size: 12px; }}
@@ -528,7 +573,7 @@ def main():
         <small>目前比賽</small>
         <strong>{live_text}</strong>
       </div>
-      <div class="metric wide">
+      <div class="metric wide next-metric" tabindex="0">
         <small>下一場比賽</small>
         <strong>{next_text}</strong>
         <div class="countdown" data-kickoff="{next_iso}">
@@ -537,6 +582,7 @@ def main():
           <span><b data-minutes>--</b><br><small>分鐘</small></span>
           <span><b data-seconds>--</b><br><small>秒</small></span>
         </div>
+        {upcoming_panel}
       </div>
     </section>
     <section class="grid">
