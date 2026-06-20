@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T20:52:43Z",
+  "updated_at": "2026-06-20T23:53:39Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -389,22 +389,22 @@
       "teams": [
         {
           "team": "Germany",
-          "w": 1,
+          "w": 2,
           "d": 0,
           "l": 0,
-          "gf": 7,
-          "ga": 1,
-          "gd": 6,
-          "pts": 3
+          "gf": 9,
+          "ga": 2,
+          "gd": 7,
+          "pts": 6
         },
         {
           "team": "Ivory Coast",
           "w": 1,
           "d": 0,
-          "l": 0,
-          "gf": 1,
-          "ga": 0,
-          "gd": 1,
+          "l": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
           "pts": 3
         },
         {
@@ -449,9 +449,9 @@
           "date": "2026-06-20",
           "home": "Germany",
           "away": "Ivory Coast",
-          "home_score": 0,
+          "home_score": 2,
           "away_score": 1,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-20",
