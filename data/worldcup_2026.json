@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T22:02:26Z",
+  "updated_at": "2026-06-21T22:51:35Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -742,8 +742,8 @@
           "date": "2026-06-21",
           "home": "Uruguay",
           "away": "Cabo Verde",
-          "home_score": 0,
-          "away_score": 0,
+          "home_score": 2,
+          "away_score": 1,
           "status": "live"
         },
         {
