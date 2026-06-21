@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T17:09:32Z",
+  "updated_at": "2026-06-21T20:54:55Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -639,9 +639,9 @@
           "date": "2026-06-21",
           "home": "Belgium",
           "away": "Iran",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 0,
+          "status": "live"
         },
         {
           "date": "2026-06-21",
@@ -673,14 +673,14 @@
       "name": "H",
       "teams": [
         {
-          "team": "Saudi Arabia",
-          "w": 0,
+          "team": "Spain",
+          "w": 1,
           "d": 1,
           "l": 0,
-          "gf": 1,
-          "ga": 1,
-          "gd": 0,
-          "pts": 1
+          "gf": 4,
+          "ga": 0,
+          "gd": 4,
+          "pts": 4
         },
         {
           "team": "Uruguay",
@@ -703,13 +703,13 @@
           "pts": 1
         },
         {
-          "team": "Spain",
+          "team": "Saudi Arabia",
           "w": 0,
           "d": 1,
-          "l": 0,
-          "gf": 0,
-          "ga": 0,
-          "gd": 0,
+          "l": 1,
+          "gf": 1,
+          "ga": 5,
+          "gd": -4,
           "pts": 1
         }
       ],
@@ -734,9 +734,9 @@
           "date": "2026-06-21",
           "home": "Spain",
           "away": "Saudi Arabia",
-          "home_score": 3,
+          "home_score": 4,
           "away_score": 0,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-21",
