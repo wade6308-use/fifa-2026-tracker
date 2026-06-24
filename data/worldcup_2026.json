@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T10:34:26Z",
+  "updated_at": "2026-06-24T22:42:27Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -103,43 +103,43 @@
       "name": "B",
       "teams": [
         {
-          "team": "Canada",
-          "w": 1,
+          "team": "Switzerland",
+          "w": 2,
           "d": 1,
           "l": 0,
           "gf": 7,
-          "ga": 1,
-          "gd": 6,
-          "pts": 4
+          "ga": 3,
+          "gd": 4,
+          "pts": 7
         },
         {
-          "team": "Switzerland",
+          "team": "Canada",
           "w": 1,
           "d": 1,
-          "l": 0,
-          "gf": 5,
-          "ga": 2,
-          "gd": 3,
+          "l": 1,
+          "gf": 8,
+          "ga": 3,
+          "gd": 5,
           "pts": 4
         },
         {
           "team": "Bosnia and Herzegovina",
-          "w": 0,
+          "w": 1,
           "d": 1,
           "l": 1,
-          "gf": 2,
-          "ga": 5,
-          "gd": -3,
-          "pts": 1
+          "gf": 5,
+          "ga": 6,
+          "gd": -1,
+          "pts": 4
         },
         {
           "team": "Qatar",
           "w": 0,
           "d": 1,
-          "l": 1,
-          "gf": 1,
-          "ga": 7,
-          "gd": -6,
+          "l": 2,
+          "gf": 2,
+          "ga": 10,
+          "gd": -8,
           "pts": 1
         }
       ],
@@ -180,17 +180,17 @@
           "date": "2026-06-24",
           "home": "Switzerland",
           "away": "Canada",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 2,
+          "away_score": 1,
+          "status": "finished"
         },
         {
           "date": "2026-06-24",
           "home": "Bosnia and Herzegovina",
           "away": "Qatar",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 3,
+          "away_score": 1,
+          "status": "finished"
         }
       ]
     },
@@ -275,17 +275,17 @@
           "date": "2026-06-24",
           "home": "Morocco",
           "away": "Haiti",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 1,
+          "status": "live"
         },
         {
           "date": "2026-06-24",
           "home": "Scotland",
           "away": "Brazil",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 1,
+          "status": "live"
         }
       ]
     },
