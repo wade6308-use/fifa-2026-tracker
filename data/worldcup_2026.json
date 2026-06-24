@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T00:38:35Z",
+  "updated_at": "2026-06-24T01:40:46Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -1073,22 +1073,22 @@
           "pts": 4
         },
         {
+          "team": "Croatia",
+          "w": 1,
+          "d": 0,
+          "l": 1,
+          "gf": 3,
+          "ga": 4,
+          "gd": -1,
+          "pts": 3
+        },
+        {
           "team": "Panama",
           "w": 0,
           "d": 0,
-          "l": 1,
+          "l": 2,
           "gf": 0,
-          "ga": 1,
-          "gd": -1,
-          "pts": 0
-        },
-        {
-          "team": "Croatia",
-          "w": 0,
-          "d": 0,
-          "l": 1,
-          "gf": 2,
-          "ga": 4,
+          "ga": 2,
           "gd": -2,
           "pts": 0
         }
@@ -1124,7 +1124,7 @@
           "away": "Croatia",
           "home_score": 0,
           "away_score": 1,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-27",
