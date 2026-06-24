@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T22:42:27Z",
+  "updated_at": "2026-06-24T22:55:43Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -275,8 +275,8 @@
           "date": "2026-06-24",
           "home": "Morocco",
           "away": "Haiti",
-          "home_score": 1,
-          "away_score": 1,
+          "home_score": 2,
+          "away_score": 2,
           "status": "live"
         },
         {
@@ -284,7 +284,7 @@
           "home": "Scotland",
           "away": "Brazil",
           "home_score": 0,
-          "away_score": 1,
+          "away_score": 2,
           "status": "live"
         }
       ]
