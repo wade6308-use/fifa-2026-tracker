@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T03:42:11Z",
+  "updated_at": "2026-06-24T10:34:26Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -958,6 +958,16 @@
       "name": "K",
       "teams": [
         {
+          "team": "Colombia",
+          "w": 2,
+          "d": 0,
+          "l": 0,
+          "gf": 4,
+          "ga": 1,
+          "gd": 3,
+          "pts": 6
+        },
+        {
           "team": "Portugal",
           "w": 1,
           "d": 1,
@@ -968,23 +978,13 @@
           "pts": 4
         },
         {
-          "team": "Colombia",
-          "w": 1,
-          "d": 0,
-          "l": 0,
-          "gf": 3,
-          "ga": 1,
-          "gd": 2,
-          "pts": 3
-        },
-        {
           "team": "DR Congo",
           "w": 0,
           "d": 1,
-          "l": 0,
+          "l": 1,
           "gf": 1,
-          "ga": 1,
-          "gd": 0,
+          "ga": 2,
+          "gd": -1,
           "pts": 1
         },
         {
@@ -1029,7 +1029,7 @@
           "away": "DR Congo",
           "home_score": 1,
           "away_score": 0,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-27",
