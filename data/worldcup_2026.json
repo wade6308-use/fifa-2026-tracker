@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-23T23:38:05Z",
+  "updated_at": "2026-06-24T00:38:35Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -1123,7 +1123,7 @@
           "home": "Panama",
           "away": "Croatia",
           "home_score": 0,
-          "away_score": 0,
+          "away_score": 1,
           "status": "live"
         },
         {
