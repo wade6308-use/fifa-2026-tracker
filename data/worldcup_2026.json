@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T22:55:43Z",
+  "updated_at": "2026-06-25T10:19:41Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -9,42 +9,42 @@
       "teams": [
         {
           "team": "Mexico",
-          "w": 2,
+          "w": 3,
           "d": 0,
           "l": 0,
-          "gf": 3,
+          "gf": 6,
           "ga": 0,
-          "gd": 3,
-          "pts": 6
+          "gd": 6,
+          "pts": 9
+        },
+        {
+          "team": "South Africa",
+          "w": 1,
+          "d": 1,
+          "l": 1,
+          "gf": 2,
+          "ga": 3,
+          "gd": -1,
+          "pts": 4
         },
         {
           "team": "South Korea",
           "w": 1,
           "d": 0,
-          "l": 1,
+          "l": 2,
           "gf": 2,
-          "ga": 2,
-          "gd": 0,
+          "ga": 3,
+          "gd": -1,
           "pts": 3
         },
         {
           "team": "Czechia",
           "w": 0,
           "d": 1,
-          "l": 1,
+          "l": 2,
           "gf": 2,
-          "ga": 3,
-          "gd": -1,
-          "pts": 1
-        },
-        {
-          "team": "South Africa",
-          "w": 0,
-          "d": 1,
-          "l": 1,
-          "gf": 1,
-          "ga": 3,
-          "gd": -2,
+          "ga": 6,
+          "gd": -4,
           "pts": 1
         }
       ],
@@ -85,17 +85,17 @@
           "date": "2026-06-24",
           "home": "South Africa",
           "away": "South Korea",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 0,
+          "status": "finished"
         },
         {
           "date": "2026-06-24",
           "home": "Czechia",
           "away": "Mexico",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 3,
+          "status": "finished"
         }
       ]
     },
@@ -199,42 +199,42 @@
       "teams": [
         {
           "team": "Brazil",
-          "w": 1,
+          "w": 2,
           "d": 1,
           "l": 0,
-          "gf": 4,
+          "gf": 7,
           "ga": 1,
-          "gd": 3,
-          "pts": 4
+          "gd": 6,
+          "pts": 7
         },
         {
           "team": "Morocco",
-          "w": 1,
+          "w": 2,
           "d": 1,
           "l": 0,
-          "gf": 2,
-          "ga": 1,
-          "gd": 1,
-          "pts": 4
+          "gf": 6,
+          "ga": 3,
+          "gd": 3,
+          "pts": 7
         },
         {
           "team": "Scotland",
           "w": 1,
           "d": 0,
-          "l": 1,
+          "l": 2,
           "gf": 1,
-          "ga": 1,
-          "gd": 0,
+          "ga": 4,
+          "gd": -3,
           "pts": 3
         },
         {
           "team": "Haiti",
           "w": 0,
           "d": 0,
-          "l": 2,
-          "gf": 0,
-          "ga": 4,
-          "gd": -4,
+          "l": 3,
+          "gf": 2,
+          "ga": 8,
+          "gd": -6,
           "pts": 0
         }
       ],
@@ -275,17 +275,17 @@
           "date": "2026-06-24",
           "home": "Morocco",
           "away": "Haiti",
-          "home_score": 2,
+          "home_score": 4,
           "away_score": 2,
-          "status": "live"
+          "status": "finished"
         },
         {
           "date": "2026-06-24",
           "home": "Scotland",
           "away": "Brazil",
           "home_score": 0,
-          "away_score": 2,
-          "status": "live"
+          "away_score": 3,
+          "status": "finished"
         }
       ]
     },
