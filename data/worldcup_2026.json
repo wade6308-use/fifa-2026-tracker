@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T00:21:56Z",
+  "updated_at": "2026-06-26T10:37:10Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -296,41 +296,41 @@
           "team": "United States",
           "w": 2,
           "d": 0,
-          "l": 0,
-          "gf": 6,
-          "ga": 1,
-          "gd": 5,
+          "l": 1,
+          "gf": 8,
+          "ga": 4,
+          "gd": 4,
           "pts": 6
         },
         {
           "team": "Australia",
           "w": 1,
-          "d": 0,
+          "d": 1,
           "l": 1,
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "pts": 3
+          "pts": 4
         },
         {
           "team": "Paraguay",
           "w": 1,
-          "d": 0,
+          "d": 1,
           "l": 1,
           "gf": 2,
           "ga": 4,
           "gd": -2,
-          "pts": 3
+          "pts": 4
         },
         {
           "team": "Türkiye",
-          "w": 0,
+          "w": 1,
           "d": 0,
           "l": 2,
-          "gf": 0,
-          "ga": 3,
-          "gd": -3,
-          "pts": 0
+          "gf": 3,
+          "ga": 5,
+          "gd": -2,
+          "pts": 3
         }
       ],
       "matches": [
@@ -370,17 +370,17 @@
           "date": "2026-06-25",
           "home": "Türkiye",
           "away": "United States",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 3,
+          "away_score": 2,
+          "status": "finished"
         },
         {
           "date": "2026-06-25",
           "home": "Paraguay",
           "away": "Australia",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 0,
+          "status": "finished"
         }
       ]
     },
@@ -484,42 +484,42 @@
       "teams": [
         {
           "team": "Netherlands",
-          "w": 1,
+          "w": 2,
           "d": 1,
           "l": 0,
-          "gf": 7,
-          "ga": 3,
-          "gd": 4,
-          "pts": 4
+          "gf": 10,
+          "ga": 4,
+          "gd": 6,
+          "pts": 7
         },
         {
           "team": "Japan",
           "w": 1,
-          "d": 1,
+          "d": 2,
           "l": 0,
-          "gf": 6,
-          "ga": 2,
+          "gf": 7,
+          "ga": 3,
           "gd": 4,
-          "pts": 4
+          "pts": 5
         },
         {
           "team": "Sweden",
           "w": 1,
-          "d": 0,
+          "d": 1,
           "l": 1,
-          "gf": 6,
-          "ga": 6,
+          "gf": 7,
+          "ga": 7,
           "gd": 0,
-          "pts": 3
+          "pts": 4
         },
         {
           "team": "Tunisia",
           "w": 0,
           "d": 0,
-          "l": 2,
-          "gf": 1,
-          "ga": 9,
-          "gd": -8,
+          "l": 3,
+          "gf": 2,
+          "ga": 12,
+          "gd": -10,
           "pts": 0
         }
       ],
@@ -561,16 +561,16 @@
           "home": "Tunisia",
           "away": "Netherlands",
           "home_score": 1,
-          "away_score": 2,
-          "status": "live"
+          "away_score": 3,
+          "status": "finished"
         },
         {
           "date": "2026-06-25",
           "home": "Japan",
           "away": "Sweden",
           "home_score": 1,
-          "away_score": 0,
-          "status": "live"
+          "away_score": 1,
+          "status": "finished"
         }
       ]
     },
