@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T10:37:10Z",
+  "updated_at": "2026-06-26T22:47:28Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -769,42 +769,42 @@
       "teams": [
         {
           "team": "France",
-          "w": 2,
+          "w": 3,
           "d": 0,
           "l": 0,
-          "gf": 6,
-          "ga": 1,
-          "gd": 5,
-          "pts": 6
+          "gf": 10,
+          "ga": 2,
+          "gd": 8,
+          "pts": 9
         },
         {
           "team": "Norway",
           "w": 2,
           "d": 0,
-          "l": 0,
-          "gf": 7,
-          "ga": 3,
-          "gd": 4,
+          "l": 1,
+          "gf": 8,
+          "ga": 7,
+          "gd": 1,
           "pts": 6
         },
         {
           "team": "Senegal",
-          "w": 0,
+          "w": 1,
           "d": 0,
           "l": 2,
-          "gf": 3,
+          "gf": 8,
           "ga": 6,
-          "gd": -3,
-          "pts": 0
+          "gd": 2,
+          "pts": 3
         },
         {
           "team": "Iraq",
           "w": 0,
           "d": 0,
-          "l": 2,
+          "l": 3,
           "gf": 1,
-          "ga": 7,
-          "gd": -6,
+          "ga": 12,
+          "gd": -11,
           "pts": 0
         }
       ],
@@ -845,17 +845,17 @@
           "date": "2026-06-26",
           "home": "Norway",
           "away": "France",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 1,
+          "away_score": 4,
+          "status": "finished"
         },
         {
           "date": "2026-06-26",
           "home": "Senegal",
           "away": "Iraq",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 5,
+          "away_score": 0,
+          "status": "finished"
         }
       ]
     },
