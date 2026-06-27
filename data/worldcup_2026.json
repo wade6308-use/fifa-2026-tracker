@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-27T06:14:43Z",
+  "updated_at": "2026-06-27T23:43:01Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -1035,17 +1035,17 @@
           "date": "2026-06-27",
           "home": "Colombia",
           "away": "Portugal",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 0,
+          "status": "live"
         },
         {
           "date": "2026-06-27",
           "home": "DR Congo",
           "away": "Uzbekistan",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 1,
+          "status": "live"
         }
       ]
     },
@@ -1054,42 +1054,42 @@
       "teams": [
         {
           "team": "England",
-          "w": 1,
+          "w": 2,
           "d": 1,
           "l": 0,
-          "gf": 4,
+          "gf": 6,
           "ga": 2,
-          "gd": 2,
-          "pts": 4
+          "gd": 4,
+          "pts": 7
+        },
+        {
+          "team": "Croatia",
+          "w": 2,
+          "d": 0,
+          "l": 1,
+          "gf": 5,
+          "ga": 5,
+          "gd": 0,
+          "pts": 6
         },
         {
           "team": "Ghana",
           "w": 1,
           "d": 1,
-          "l": 0,
-          "gf": 1,
-          "ga": 0,
-          "gd": 1,
-          "pts": 4
-        },
-        {
-          "team": "Croatia",
-          "w": 1,
-          "d": 0,
           "l": 1,
-          "gf": 3,
-          "ga": 4,
-          "gd": -1,
-          "pts": 3
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "pts": 4
         },
         {
           "team": "Panama",
           "w": 0,
           "d": 0,
-          "l": 2,
+          "l": 3,
           "gf": 0,
-          "ga": 2,
-          "gd": -2,
+          "ga": 4,
+          "gd": -4,
           "pts": 0
         }
       ],
@@ -1130,17 +1130,17 @@
           "date": "2026-06-27",
           "home": "Panama",
           "away": "England",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 2,
+          "status": "finished"
         },
         {
           "date": "2026-06-27",
           "home": "Croatia",
           "away": "Ghana",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 2,
+          "away_score": 1,
+          "status": "finished"
         }
       ]
     }
