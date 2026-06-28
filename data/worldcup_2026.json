@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-28T03:39:12Z",
+  "updated_at": "2026-06-28T04:39:35Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -864,42 +864,42 @@
       "teams": [
         {
           "team": "Argentina",
-          "w": 2,
+          "w": 3,
           "d": 0,
           "l": 0,
-          "gf": 5,
-          "ga": 0,
-          "gd": 5,
-          "pts": 6
+          "gf": 8,
+          "ga": 1,
+          "gd": 7,
+          "pts": 9
         },
         {
           "team": "Austria",
           "w": 1,
-          "d": 0,
+          "d": 1,
           "l": 1,
-          "gf": 3,
-          "ga": 3,
+          "gf": 6,
+          "ga": 6,
           "gd": 0,
-          "pts": 3
+          "pts": 4
         },
         {
           "team": "Algeria",
           "w": 1,
-          "d": 0,
+          "d": 1,
           "l": 1,
-          "gf": 2,
-          "ga": 4,
+          "gf": 5,
+          "ga": 7,
           "gd": -2,
-          "pts": 3
+          "pts": 4
         },
         {
           "team": "Jordan",
           "w": 0,
           "d": 0,
-          "l": 2,
-          "gf": 2,
-          "ga": 5,
-          "gd": -3,
+          "l": 3,
+          "gf": 3,
+          "ga": 8,
+          "gd": -5,
           "pts": 0
         }
       ],
@@ -940,17 +940,17 @@
           "date": "2026-06-27",
           "home": "Algeria",
           "away": "Austria",
-          "home_score": 2,
-          "away_score": 2,
-          "status": "live"
+          "home_score": 3,
+          "away_score": 3,
+          "status": "finished"
         },
         {
           "date": "2026-06-27",
           "home": "Jordan",
           "away": "Argentina",
           "home_score": 1,
-          "away_score": 2,
-          "status": "live"
+          "away_score": 3,
+          "status": "finished"
         }
       ]
     },
