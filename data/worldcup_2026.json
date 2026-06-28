@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-28T01:37:26Z",
+  "updated_at": "2026-06-28T02:37:39Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -940,17 +940,17 @@
           "date": "2026-06-27",
           "home": "Algeria",
           "away": "Austria",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 1,
+          "status": "live"
         },
         {
           "date": "2026-06-27",
           "home": "Jordan",
           "away": "Argentina",
-          "home_score": null,
-          "away_score": null,
-          "status": "scheduled"
+          "home_score": 0,
+          "away_score": 2,
+          "status": "live"
         }
       ]
     },
