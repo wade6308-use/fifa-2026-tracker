@@ -111,6 +111,15 @@ TEAM_FLAG_CODE = {
     "Ghana": "gh",
     "Panama": "pa",
 }
+
+STAGE_ZH = {
+    "Round of 32": "32 強",
+    "Round of 16": "16 強",
+    "Quarter-final": "半準決賽",
+    "Semi-final": "準決賽",
+    "Play-off for third place": "季軍戰",
+    "Final": "決賽",
+}
 KICKOFF_ET = {
     ("2026-06-11", "Mexico", "South Africa"): "15:00",
     ("2026-06-11", "South Korea", "Czechia"): "22:00",
@@ -237,6 +246,8 @@ def team_label(name):
     return f'{flag_img(name)}<span>{team_name(name)}</span>'
 
 def kickoff_iso(match):
+    if match.get("iso"):
+        return match["iso"]
     time_et = KICKOFF_ET.get((match["date"], match["home"], match["away"]))
     if not time_et:
         return None
@@ -258,9 +269,23 @@ def kickoff_display(match):
 
 
 def fmt_score(match):
-    if match.get("status") == "finished":
+    if match.get("home_score") is not None and match.get("away_score") is not None:
         return f'{match["home_score"]} - {match["away_score"]}'
     return "vs"
+
+
+def stage_label(name):
+    return STAGE_ZH.get(name, name)
+
+
+def all_dashboard_matches(data):
+    matches = []
+    for group in data["groups"]:
+        for order, match in enumerate(group["matches"]):
+            matches.append((f'{group["name"]} 組', order, match))
+    for order, match in enumerate(data.get("knockout_matches", [])):
+        matches.append((stage_label(match.get("stage", "淘汰賽")), order, match))
+    return matches
 
 
 def render_group(group):
@@ -320,21 +345,53 @@ def render_group(group):
     """
 
 
+def render_knockout(data):
+    matches = []
+    for match in data.get("knockout_matches", []):
+        status = "final" if match.get("status") == "finished" else "next"
+        matches.append(
+            "\n".join(
+                [
+                    f'            <li class="{status}">',
+                    f'              <span class="date">{kickoff_display(match)}</span>',
+                    f'              <span class="fixture"><span class="team-label">{team_label(match["home"])}</span></span>',
+                    f"              <strong>{fmt_score(match)}</strong>",
+                    f'              <span class="fixture right"><span class="team-label">{team_label(match["away"])}</span></span>',
+                    "            </li>",
+                ]
+            )
+        )
+    if not matches:
+        return ""
+    return "\n".join(
+        [
+            '    <section class="history knockout">',
+            '      <div class="history-head">',
+            '        <p>Knockout</p>',
+            '        <h2>淘汰賽</h2>',
+            '      </div>',
+            '      <ol class="match-list knockout-list">',
+            "\n".join(matches),
+            '      </ol>',
+            '    </section>',
+        ]
+    )
+
+
 def upcoming_matches(data, limit=3):
     upcoming = []
     now = datetime.now(timezone.utc)
-    for group in data["groups"]:
-        for order, match in enumerate(group["matches"]):
-            if match.get("status") == "finished":
-                continue
-            iso = kickoff_iso(match)
-            if iso and datetime.fromisoformat(iso.replace("Z", "+00:00")) <= now:
-                continue
-            sort_key = iso or f'{match["date"]}T23:59:59Z'
-            upcoming.append((sort_key, group["name"], order, match))
+    for label, order, match in all_dashboard_matches(data):
+        if match.get("status") == "finished":
+            continue
+        iso = kickoff_iso(match)
+        if iso and datetime.fromisoformat(iso.replace("Z", "+00:00")) <= now:
+            continue
+        sort_key = iso or f'{match["date"]}T23:59:59Z'
+        upcoming.append((sort_key, label, order, match))
     return [
-        (group_name, match)
-        for _, group_name, _, match in sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[:limit]
+        (label, match)
+        for _, label, _, match in sorted(upcoming, key=lambda item: (item[0], item[1], item[2]))[:limit]
     ]
 
 
@@ -349,20 +406,19 @@ def current_match(data):
     now = datetime.now(timezone.utc)
     live_window = timedelta(minutes=150)
     candidates = []
-    for group in data["groups"]:
-        for order, match in enumerate(group["matches"]):
-            if match.get("status") == "finished":
-                continue
-            iso = kickoff_iso(match)
-            if not iso:
-                continue
-            start = datetime.fromisoformat(iso.replace("Z", "+00:00"))
-            if start <= now < start + live_window:
-                candidates.append((start, group["name"], order, match))
+    for label, order, match in all_dashboard_matches(data):
+        if match.get("status") == "finished":
+            continue
+        iso = kickoff_iso(match)
+        if not iso:
+            continue
+        start = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+        if start <= now < start + live_window:
+            candidates.append((start, label, order, match))
     if not candidates:
         return None
-    _, group_name, _, match = sorted(candidates, key=lambda item: (item[0], item[1], item[2]))[0]
-    return group_name, match
+    _, label, _, match = sorted(candidates, key=lambda item: (item[0], item[1], item[2]))[0]
+    return label, match
 
 
 def render_upcoming_panel(matches):
@@ -375,7 +431,7 @@ def render_upcoming_panel(matches):
                 [
                     "            <li>",
                     f'              <span class="queue-index">{index}</span>',
-                    f'              <span class="queue-meta">{group_name} 組｜{kickoff_display(match)}</span>',
+                    f'              <span class="queue-meta">{group_name}｜{kickoff_display(match)}</span>',
                     f'              <strong><span class="team-label">{team_label(match["home"])}</span> vs <span class="team-label">{team_label(match["away"])}</span></strong>',
                     "            </li>",
                 ]
@@ -418,7 +474,10 @@ def main():
         for match in group["matches"]
         if match.get("status") == "finished"
     )
+    total_matches += len(data.get("knockout_matches", []))
+    finished += sum(1 for match in data.get("knockout_matches", []) if match.get("status") == "finished")
     groups_html = "\n".join(render_group(group) for group in data["groups"])
+    knockout_html = render_knockout(data)
     payload = json.dumps(data, ensure_ascii=False)
     source = data.get("source", {})
     if source.get("fifa_matches_url"):
@@ -434,7 +493,7 @@ def main():
         else:
             live_score = "即時比分待更新"
         live_text = (
-            f'{live_group} 組｜{kickoff_display(live_game)}｜'
+            f'{live_group}｜{kickoff_display(live_game)}｜'
             f'<span class="team-label">{team_label(live_game["home"])}</span> vs '
             f'<span class="team-label">{team_label(live_game["away"])}</span>｜{live_score}'
         )
@@ -445,13 +504,13 @@ def main():
         next_group, next_game = upcoming[0]
         next_iso = kickoff_iso(next_game) or ""
         next_text = (
-            f'{next_group} 組｜{kickoff_display(next_game)}｜'
+            f'{next_group}｜{kickoff_display(next_game)}｜'
             f'<span class="team-label">{team_label(next_game["home"])}</span> vs '
             f'<span class="team-label">{team_label(next_game["away"])}</span>'
         )
     else:
         next_iso = ""
-        next_text = "小組賽已全部完賽"
+        next_text = "本屆賽事已全部完賽"
     upcoming_panel = render_upcoming_panel(upcoming)
 
     HTML_PATH.write_text(
@@ -588,6 +647,7 @@ def main():
     <section class="grid">
       {groups_html}
     </section>
+    {knockout_html}
     <section class="history">
       <div class="history-head">
         <p>歷史</p>

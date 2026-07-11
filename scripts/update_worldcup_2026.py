@@ -111,16 +111,66 @@ def recalc_group(group):
 
 def fifa_status(item):
     has_score = item.get("HomeTeamScore") is not None and item.get("AwayTeamScore") is not None
-    if has_score and item.get("ResultType") == 1:
+    if has_score and item.get("ResultType") in {1, 2, 3}:
         return "finished"
     if has_score:
         return "live"
     return "scheduled"
 
 
+def stage_name(item):
+    return localized_description(item.get("StageName")) or "Match"
+
+
+def knockout_team_name(item, side):
+    team = fifa_team_name(item.get(side))
+    if team:
+        return team
+    placeholder = item.get("PlaceHolderA" if side == "Home" else "PlaceHolderB")
+    return placeholder or "TBD"
+
+
+def fifa_match_number(item):
+    value = item.get("MatchNumber")
+    return int(value) if value is not None else 0
+
+
+def knockout_entry(item):
+    status = fifa_status(item)
+    home_score = item.get("HomeTeamScore")
+    away_score = item.get("AwayTeamScore")
+    if status == "scheduled":
+        home_score = None
+        away_score = None
+    return {
+        "match_number": fifa_match_number(item),
+        "stage": stage_name(item),
+        "date": (item.get("Date") or "")[:10],
+        "iso": item.get("Date"),
+        "home": knockout_team_name(item, "Home"),
+        "away": knockout_team_name(item, "Away"),
+        "home_score": home_score,
+        "away_score": away_score,
+        "status": status,
+    }
+
+
+def knockout_matches_from_api(fifa_data):
+    matches = []
+    for item in fifa_data.get("Results", []):
+        if item.get("IdGroup") is not None:
+            continue
+        number = fifa_match_number(item)
+        if number < 73:
+            continue
+        matches.append(knockout_entry(item))
+    return sorted(matches, key=lambda match: (match.get("iso") or "", match.get("match_number", 0)))
+
+
 def update_from_sources(data, dry_run=False):
     fifa_url = data.get("source", {}).get("fifa_matches_url", FIFA_MATCHES_URL)
-    fifa_matches = fifa_matches_by_key(fetch_json(fifa_url))
+    fifa_data = fetch_json(fifa_url)
+    fifa_matches = fifa_matches_by_key(fifa_data)
 
     changed = []
     missing = []
@@ -152,6 +202,12 @@ def update_from_sources(data, dry_run=False):
 
     for group in data["groups"]:
         recalc_group(group)
+
+    old_knockout = data.get("knockout_matches", [])
+    new_knockout = knockout_matches_from_api(fifa_data)
+    if old_knockout != new_knockout:
+        data["knockout_matches"] = new_knockout
+        changed.append(f"Knockout stage: {len(new_knockout)} matches updated")
 
     if missing:
         print("Warning: FIFA API matches not found for:")
