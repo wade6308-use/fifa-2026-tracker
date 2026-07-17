@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-11T07:04:35Z",
+  "updated_at": "2026-07-17T07:00:34Z",
   "source": {
     "fifa_matches_url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285023"
   },
@@ -1439,9 +1439,9 @@
       "iso": "2026-07-11T21:00:00Z",
       "home": "Norway",
       "away": "England",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled"
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished"
     },
     {
       "match_number": 100,
@@ -1450,9 +1450,9 @@
       "iso": "2026-07-12T01:00:00Z",
       "home": "Argentina",
       "away": "Switzerland",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled"
+      "home_score": 3,
+      "away_score": 1,
+      "status": "finished"
     },
     {
       "match_number": 101,
@@ -1461,28 +1461,28 @@
       "iso": "2026-07-14T19:00:00Z",
       "home": "France",
       "away": "Spain",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled"
+      "home_score": 0,
+      "away_score": 2,
+      "status": "finished"
     },
     {
       "match_number": 102,
       "stage": "Semi-final",
       "date": "2026-07-15",
       "iso": "2026-07-15T19:00:00Z",
-      "home": "W99",
-      "away": "W100",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled"
+      "home": "England",
+      "away": "Argentina",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished"
     },
     {
       "match_number": 103,
-      "stage": "Play-off for third place",
+      "stage": "Bronze final",
       "date": "2026-07-18",
       "iso": "2026-07-18T21:00:00Z",
-      "home": "RU101",
-      "away": "RU102",
+      "home": "France",
+      "away": "England",
       "home_score": null,
       "away_score": null,
       "status": "scheduled"
@@ -1492,8 +1492,8 @@
       "stage": "Final",
       "date": "2026-07-19",
       "iso": "2026-07-19T19:00:00Z",
-      "home": "W101",
-      "away": "W102",
+      "home": "Spain",
+      "away": "Argentina",
       "home_score": null,
       "away_score": null,
       "status": "scheduled"
